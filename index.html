@@ -300,9 +300,16 @@ nav {
   left: 1.5rem;
 }
 
-[dir="rtl"] .contact-link {
+[dir="rtl"] .contact-link,
+[dir="rtl"] input[type="tel"],
+[dir="rtl"] input[type="email"] {
   direction: ltr;
-  unicode-bidi: bidi-override;
+  text-align: right;
+}
+
+[dir="rtl"] input[type="tel"]::placeholder,
+[dir="rtl"] input[type="email"]::placeholder {
+  text-align: right;
 }
 
 /* ── HERO ─────────────────────────────────────────────── */
