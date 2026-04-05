@@ -6,6 +6,10 @@
 <meta name="google-site-verification" content="vw-sjlJtPXu5iM2luKm5fhUh1F2Or8_YCWrAlapki4g" />
 <link rel="icon" type="image/x-icon" href="logo.ico">
 
+<!-- Preload Critical Resources -->
+<link rel="preload" href="https://fonts.gstatic.com/s/manrope/v15/xn7gYHE41ni1AdIRggexSg35J84N0V11R.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMr5CgdebKl8.woff2" as="font" type="font/woff2" crossorigin>
+
 <!-- SEO Meta Tags -->
 <title>Eco Air Solutions | Expert CVC & Climatisation en Algérie</title>
 <meta name="description" content="Eco Air Solutions - Experts en installation, maintenance et étude de systèmes CVC en Algérie. Solutions écoresponsables pour bâtiments résidentiels, commerciaux et industriels. 69 wilayas couvertes.">
@@ -160,6 +164,7 @@
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -777,9 +782,15 @@ nav {
 
 .sector-img {
   position: absolute; inset: 0;
-  background-size: cover;
-  background-position: center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   transition: transform 0.5s ease;
+}
+
+.sector-img.lazy-loaded {
+  background-attachment: scroll;
 }
 
 .sector-item:hover .sector-img { transform: scale(1.08); }
@@ -1179,6 +1190,15 @@ footer {
 [data-lang-inline] { display: none; }
 [data-lang-inline].lang-active { display: inline; }
 
+/* ── REDUCED MOTION ──────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* ── MOBILE ───────────────────────────────────────────── */
 @media (max-width: 1100px) {
   .nav-links { display: none; }
@@ -1217,6 +1237,10 @@ footer {
   .hero-stat { min-width: 100%; padding: 1rem 1.25rem; }
   .hero-stat:not(:last-child)::after { display: none; }
   .stat-num { font-size: 1.75rem; }
+  
+  /* Disable heavy animations on mobile */
+  .hero-grid, .hero-glow, .hero-icon { display: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
   
   .services { padding: 3rem 1.25rem 4rem 1.25rem; margin-top: 0; }
   .section-header { grid-template-columns: 1fr; gap: 1rem; margin-bottom: 2.5rem; }
@@ -1532,7 +1556,7 @@ footer {
   <div class="sectors-grid reveal">
 
     <div class="sector-item" data-lang-switch>
-      <div class="sector-img" style="background-image: url('sector-building.jpg');"></div>
+      <img class="sector-img" data-src="sector-building.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Building" loading="lazy">
       <div class="sector-overlay"></div>
       <div class="sector-content">
         <p class="sector-name">
@@ -1549,7 +1573,7 @@ footer {
     </div>
 
     <div class="sector-item" data-lang-switch>
-      <div class="sector-img" style="background-image: url('sector-commercial.jpg');"></div>
+      <img class="sector-img" data-src="sector-commercial.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Commercial" loading="lazy">
       <div class="sector-overlay"></div>
       <div class="sector-content">
         <p class="sector-name">
@@ -1566,7 +1590,7 @@ footer {
     </div>
 
     <div class="sector-item" data-lang-switch>
-      <div class="sector-img" style="background-image: url('sector-healthcare.jpg');"></div>
+      <img class="sector-img" data-src="sector-healthcare.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Healthcare" loading="lazy">
       <div class="sector-overlay"></div>
       <div class="sector-content">
         <p class="sector-name">
@@ -1583,7 +1607,7 @@ footer {
     </div>
 
     <div class="sector-item" data-lang-switch>
-      <div class="sector-img" style="background-image: url('sector-hospitality.jpg');"></div>
+      <img class="sector-img" data-src="sector-hospitality.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Hospitality" loading="lazy">
       <div class="sector-overlay"></div>
       <div class="sector-content">
         <p class="sector-name">
@@ -1600,7 +1624,7 @@ footer {
     </div>
 
     <div class="sector-item" data-lang-switch>
-      <div class="sector-img" style="background-image: url('sector-industry.jpg');"></div>
+      <img class="sector-img" data-src="sector-industry.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Industry" loading="lazy">
       <div class="sector-overlay"></div>
       <div class="sector-content">
         <p class="sector-name">
@@ -1617,7 +1641,7 @@ footer {
     </div>
 
     <div class="sector-item" data-lang-switch>
-      <div class="sector-img" style="background-image: url('sector-food-industry.jpg');"></div>
+      <img class="sector-img" data-src="sector-food-industry.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Food Industry" loading="lazy">
       <div class="sector-overlay"></div>
       <div class="sector-content">
         <p class="sector-name">
@@ -1634,7 +1658,7 @@ footer {
     </div>
 
     <div class="sector-item" data-lang-switch>
-      <div class="sector-img" style="background-image: url('sector-energy.jpg');"></div>
+      <img class="sector-img" data-src="sector-energy.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Energy" loading="lazy">
       <div class="sector-overlay"></div>
       <div class="sector-content">
         <p class="sector-name">
@@ -1651,7 +1675,7 @@ footer {
     </div>
 
     <div class="sector-item" data-lang-switch>
-      <div class="sector-img" style="background-image: url('sector-education.jpg');"></div>
+      <img class="sector-img" data-src="sector-education.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Education" loading="lazy">
       <div class="sector-overlay"></div>
       <div class="sector-content">
         <p class="sector-name">
@@ -2090,6 +2114,21 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Lazy load images with Intersection Observer
+const lazyImages = document.querySelectorAll('img[data-src]');
+const imageObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      img.src = img.dataset.src;
+      img.classList.add('lazy-loaded');
+      imageObserver.unobserve(img);
+    }
+  });
+}, { rootMargin: '100px' });
+
+lazyImages.forEach(img => imageObserver.observe(img));
 
 // Formspree AJAX
 window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
