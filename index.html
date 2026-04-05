@@ -1234,9 +1234,9 @@ footer {
   .hero-stat:not(:last-child)::after { display: none; }
   .stat-num { font-size: 1.75rem; }
   
-  /* Disable heavy animations on mobile */
-  .hero-grid, .hero-glow, .hero-icon { display: none; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  /* Disable heavy grid animation on mobile, keep fan */
+  .hero-grid { display: none; }
+  .hero-icon { opacity: 0.03; width: 300px; height: 300px; }
   
   .services { padding: 3rem 1.25rem 4rem 1.25rem; margin-top: 0; }
   .section-header { grid-template-columns: 1fr; gap: 1rem; margin-bottom: 2.5rem; }
