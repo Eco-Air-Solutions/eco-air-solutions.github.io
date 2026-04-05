@@ -1,0 +1,1916 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eco Air Solutions — Solutions CVC Écologiques · Algérie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #005ea4;
+  --primary-container: #0077ce;
+  --surface-tint: #0060a8;
+  --on-primary: #ffffff;
+  --on-surface: #161d1f;
+  
+  --tertiary: #ac2d00;
+  --tertiary-container: #d63c05;
+  --on-tertiary-container: #fffbff;
+  
+  --secondary: #575e6d;
+  --secondary-container: #3d4554;
+  --on-secondary: #ffffff;
+  
+  --surface: #f4fafe;
+  --surface-container-low: #eef5f8;
+  --surface-container: #e8eff2;
+  --surface-container-high: #e2e9ed;
+  --surface-container-highest: #dde3e7;
+  --surface-container-lowest: #ffffff;
+  --surface-bright: #f4fafe;
+  
+  --outline-variant: #c0c7d4;
+  --outline: #707783;
+  
+  --error: #ba1a1a;
+  --on-error: #ffffff;
+  
+  --mist: #dde3e7;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--on-surface);
+  background: var(--surface);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ── NAV ──────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 6rem;
+  height: 72px;
+  background: rgba(244, 250, 254, 0.7);
+  backdrop-filter: blur(16px);
+}
+
+.nav-logo {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--on-surface);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.nav-logo-icon {
+  width: 48px; height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.nav-logo-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.nav-links {
+  display: flex; gap: 2.5rem; list-style: none;
+}
+
+.nav-links a {
+  color: var(--on-surface);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  opacity: 0.75;
+  transition: opacity 0.2s;
+}
+
+.nav-links a:hover { opacity: 1; }
+
+.lang-switcher {
+  display: flex; gap: 0.5rem;
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--on-surface);
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s;
+  opacity: 0.5;
+}
+
+.lang-btn.active,
+.lang-btn:hover {
+  background: var(--primary);
+  opacity: 1;
+  color: white;
+}
+
+[dir="rtl"] .lang-btn[onclick="setLang('ar')"] {
+  font-family: 'Noto Kufi Arabic', sans-serif;
+}
+
+/* ── HERO ─────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  background: var(--surface-container);
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-bottom: 120px;
+}
+
+.hero-gradient {
+  position: absolute; inset: 0;
+  background: 
+    radial-gradient(ellipse 80% 50% at 80% 40%, rgba(0, 94, 164, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 60% at 20% 70%, rgba(172, 45, 0, 0.05) 0%, transparent 50%);
+}
+
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 94, 164, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 94, 164, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridShift 20s linear infinite;
+}
+
+@keyframes gridShift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 60px 60px; }
+}
+
+.hero-glow {
+  position: absolute;
+  top: -10%; left: 25%;
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(0, 94, 164, 0.12) 0%, transparent 60%);
+  animation: pulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  100% { transform: scale(1.1); opacity: 1;   }
+}
+
+.hero-icon {
+  position: absolute;
+  right: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 400px; height: 400px;
+  opacity: 0.05;
+}
+
+.blade {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 180px; height: 14px;
+  border-radius: 50px;
+  background: linear-gradient(90deg, transparent, var(--primary));
+  transform-origin: left center;
+  animation: spin 8s linear infinite;
+}
+
+.blade:nth-child(1) { --r: 0deg; }
+.blade:nth-child(2) { --r: 60deg; }
+.blade:nth-child(3) { --r: 120deg; }
+.blade:nth-child(4) { --r: 180deg; }
+.blade:nth-child(5) { --r: 240deg; }
+.blade:nth-child(6) { --r: 300deg; }
+
+@keyframes spin {
+  from { transform: rotate(var(--r, 0deg)) translateY(-50%); }
+  to   { transform: rotate(calc(var(--r, 0deg) + 360deg)) translateY(-50%); }
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 6rem;
+  max-width: 1100px;
+}
+
+.hero-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px; height: 2px;
+  background: var(--primary);
+  border-radius: 1px;
+}
+
+.hero-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(3.5rem, 7vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--on-surface);
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title .accent {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-title .warm {
+  background: linear-gradient(135deg, var(--tertiary) 0%, var(--tertiary-container) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 1.125rem;
+  color: var(--secondary);
+  line-height: 1.8;
+  max-width: 560px;
+  font-weight: 400;
+  margin-bottom: 2.5rem;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+  color: var(--on-primary);
+  border: none;
+  padding: 1rem 2.25rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.25s;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 94, 164, 0.25);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 94, 164, 0.35);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--on-surface);
+  border: none;
+  padding: 1rem 2.25rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.25s;
+  opacity: 0.6;
+}
+
+.btn-secondary:hover {
+  opacity: 1;
+}
+
+.btn-secondary svg {
+  width: 16px; height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  transition: transform 0.2s;
+}
+
+.btn-secondary:hover svg {
+  transform: translateX(4px);
+}
+
+/* Stats bar */
+.hero-stats {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 10;
+  display: flex;
+  background: var(--surface-container-lowest);
+  box-shadow: 0 -4px 32px rgba(22, 29, 31, 0.06);
+}
+
+.hero-stat {
+  flex: 1;
+  padding: 2rem 2.5rem;
+  position: relative;
+}
+
+.hero-stat:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 25%; bottom: 25%;
+  width: 1px;
+  background: var(--outline-variant);
+  opacity: 0.3;
+}
+
+.stat-num {
+  font-family: 'Manrope', sans-serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--secondary);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* ── SERVICES ─────────────────────────────────────────── */
+.services {
+  padding: 10rem 6rem 8rem 6rem;
+  background: var(--surface);
+  position: relative;
+  margin-top: -4rem;
+}
+
+.section-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 4rem;
+  align-items: end;
+}
+
+.section-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.section-eyebrow::before {
+  content: '';
+  display: block;
+  width: 24px; height: 2px;
+  background: var(--primary);
+  border-radius: 1px;
+}
+
+.section-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: var(--on-surface);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.section-title .highlight {
+  color: var(--primary);
+}
+
+.section-desc {
+  font-size: 1rem;
+  color: var(--secondary);
+  line-height: 1.8;
+  font-weight: 400;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.service-card {
+  background: var(--surface-container-lowest);
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.35s;
+  border-radius: 12px;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  background: rgba(211, 228, 255, 0.5);
+  box-shadow: 0 16px 48px rgba(0, 94, 164, 0.08);
+}
+
+.service-icon {
+  width: 52px; height: 52px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0, 94, 164, 0.1) 0%, rgba(0, 119, 206, 0.1) 100%);
+  border-radius: 12px;
+}
+
+.service-icon svg {
+  width: 28px; height: 28px;
+  stroke: var(--primary);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.service-num {
+  position: absolute;
+  top: 1.5rem; right: 1.5rem;
+  font-family: 'Manrope', sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--surface-container);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.service-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--on-surface);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
+
+.service-text {
+  font-size: 0.9rem;
+  color: var(--secondary);
+  line-height: 1.7;
+}
+
+.service-tags {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  background: rgba(0, 94, 164, 0.08);
+  color: var(--primary);
+  letter-spacing: 0.03em;
+}
+
+/* ── WHY US ───────────────────────────────────────────── */
+.why {
+  background: var(--secondary-container);
+  padding: 8rem 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.why::before {
+  content: '';
+  position: absolute;
+  top: -150px; right: -150px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(0, 94, 164, 0.15) 0%, transparent 60%);
+}
+
+.why-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.why-left .section-title { color: white; }
+.why-left .section-title .highlight { color: var(--primary-container); }
+.why-left .section-eyebrow { color: var(--primary-container); opacity: 0.8; }
+
+.why-left .section-desc {
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: 1.5rem;
+}
+
+.why-right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.why-card {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 2rem;
+  border-radius: 12px;
+  transition: background 0.3s;
+}
+
+.why-card:hover {
+  background: rgba(0, 119, 206, 0.1);
+}
+
+.why-card-icon {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.why-card-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
+
+.why-card-text {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.7;
+}
+
+/* ── SECTORS ──────────────────────────────────────────── */
+.sectors {
+  padding: 8rem 6rem;
+  background: var(--surface-container-low);
+  overflow: hidden;
+}
+
+.sectors .section-title { color: var(--on-surface); }
+.sectors .section-title .highlight { color: var(--primary); }
+.sectors .section-eyebrow { color: var(--primary); }
+
+.sectors-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-top: 3.5rem;
+}
+
+.sector-item {
+  aspect-ratio: 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform 0.35s;
+}
+
+.sector-item:hover { transform: scale(1.03); }
+
+.sector-img {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s ease;
+}
+
+.sector-item:hover .sector-img { transform: scale(1.08); }
+
+.sector-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(22, 29, 31, 0.9) 0%, rgba(22, 29, 31, 0.3) 50%, transparent 100%);
+  transition: background 0.35s;
+}
+
+.sector-item:hover .sector-overlay {
+  background: linear-gradient(to top, rgba(0, 94, 164, 0.85) 0%, rgba(0, 94, 164, 0.4) 50%, transparent 100%);
+}
+
+.sector-content {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 1.5rem;
+}
+
+.sector-name {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
+
+.sector-desc {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.35s ease;
+}
+
+.sector-item:hover .sector-desc {
+  max-height: 80px;
+  opacity: 1;
+}
+
+/* ── PROCESS ──────────────────────────────────────────── */
+.process {
+  padding: 8rem 6rem;
+  background: var(--surface);
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+  position: relative;
+}
+
+.process-step {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: var(--surface-container-lowest);
+  border-radius: 12px;
+  transition: all 0.3s;
+}
+
+.process-step:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 94, 164, 0.08);
+}
+
+.step-circle {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+  color: white;
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.step-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--on-surface);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
+
+.step-text {
+  font-size: 0.8rem;
+  color: var(--secondary);
+  line-height: 1.7;
+}
+
+/* ── CONTACT ──────────────────────────────────────────── */
+.contact {
+  padding: 8rem 6rem;
+  background: var(--surface-container-low);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0, 94, 164, 0.06) 0%, transparent 60%);
+}
+
+.contact-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+  position: relative; z-index: 1;
+}
+
+.contact-left .section-title { color: var(--on-surface); }
+.contact-left .section-title .highlight { color: var(--primary); }
+
+.contact-left p {
+  color: var(--secondary);
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-top: 1.5rem;
+  max-width: 420px;
+}
+
+.contact-info {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--on-surface);
+  font-size: 0.9rem;
+}
+
+.contact-link {
+  color: var(--on-surface);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.contact-link:hover {
+  color: var(--primary);
+}
+
+.contact-row-icon {
+  width: 40px; height: 40px;
+  background: rgba(0, 94, 164, 0.08);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.form-container {
+  background: var(--surface-container-lowest);
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(22, 29, 31, 0.04);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group.full { grid-column: 1/-1; }
+
+label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--secondary);
+}
+
+input, select, textarea {
+  background: var(--surface-container-high);
+  border: none;
+  color: var(--on-surface);
+  padding: 0.9rem 1rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.2s;
+  border-radius: 8px;
+  border-bottom: 2px solid transparent;
+}
+
+input:focus, select:focus, textarea:focus {
+  background: var(--surface-container);
+  border-bottom-color: var(--primary);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--outline);
+}
+
+select option { background: var(--surface-container-lowest); }
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submit-btn {
+  grid-column: 1/-1;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 0.25s;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 16px rgba(0, 94, 164, 0.25);
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 94, 164, 0.35);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.form-success {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.form-success .success-icon {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 2rem;
+  color: white;
+}
+
+.form-success h3 {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--on-surface);
+  margin-bottom: 0.5rem;
+}
+
+.form-success p {
+  font-size: 0.95rem;
+  color: var(--secondary);
+  line-height: 1.7;
+}
+
+.form-error {
+  background: rgba(186, 26, 26, 0.1);
+  border: 1px solid var(--error);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: var(--error);
+  font-size: 0.9rem;
+}
+
+[data-fs-error] {
+  display: block;
+  color: var(--error);
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+input[data-fs-field][aria-invalid="true"],
+select[data-fs-field][aria-invalid="true"],
+textarea[data-fs-field][aria-invalid="true"] {
+  border-bottom-color: var(--error);
+}
+
+/* ── FOOTER ───────────────────────────────────────────── */
+footer {
+  background: var(--surface-container-highest);
+  padding: 3rem 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-logo {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--on-surface);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.footer-logo-icon {
+  width: 40px; height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.footer-logo-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: var(--secondary);
+}
+
+.footer-links {
+  display: flex; gap: 2rem;
+}
+
+.footer-links a {
+  font-size: 0.85rem;
+  color: var(--secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--primary); }
+
+/* ── SCROLL ANIMATIONS ────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── LANGUAGE CONTENT ─────────────────────────────────── */
+[data-lang] { display: none; }
+[data-lang].lang-active { display: block; }
+[data-lang-inline] { display: none; }
+[data-lang-inline].lang-active { display: inline; }
+
+/* ── MOBILE ───────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .section-header { display: none; }
+  .nav-links { display: none; }
+}
+
+@media (max-width: 900px) {
+  nav { padding: 0 1.5rem; }
+  .hero-content { padding: 0 2rem; }
+  .hero-stats { flex-wrap: wrap; }
+  .hero-stat { min-width: 50%; }
+  .services, .why, .sectors, .process, .contact { padding: 5rem 2rem; }
+  .services-grid { grid-template-columns: 1fr; }
+  .why-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .why-right { grid-template-columns: 1fr 1fr; }
+  .process-steps { grid-template-columns: 1fr 1fr; }
+  .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .form-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; text-align: center; padding: 2.5rem 2rem; }
+  .sectors-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+  nav { padding: 0 1rem; height: 64px; }
+  .nav-logo { font-size: 1.1rem; gap: 0.5rem; }
+  .nav-logo-icon { width: 36px; height: 36px; border-radius: 8px; }
+  .lang-switcher { gap: 0.25rem; }
+  .lang-btn { padding: 0.3rem 0.5rem; font-size: 0.7rem; }
+  
+  .hero { padding-bottom: 0; padding-top: 5rem; }
+  .hero-content { padding: 0 1.25rem 28rem 1.25rem; }
+  .hero-title { font-size: clamp(2.5rem, 10vw, 4rem); }
+  .hero-sub { font-size: 0.95rem; }
+  .hero-cta { flex-direction: column; align-items: stretch; }
+  .btn-primary, .btn-secondary { text-align: center; justify-content: center; }
+  .hero-stats { position: absolute; flex-direction: column; bottom: 0; }
+  .hero-stat { min-width: 100%; padding: 1rem 1.25rem; }
+  .hero-stat:not(:last-child)::after { display: none; }
+  .stat-num { font-size: 1.75rem; }
+  
+  .services { padding: 3rem 1.25rem 4rem 1.25rem; margin-top: 0; }
+  .section-header { grid-template-columns: 1fr; gap: 1rem; margin-bottom: 2.5rem; }
+  .section-title { font-size: clamp(2rem, 8vw, 3rem); }
+  .section-desc { font-size: 0.9rem; }
+  
+  .why, .sectors, .process, .contact { padding: 4rem 1.25rem; }
+  .services-grid { gap: 1rem; }
+  .service-card { padding: 1.5rem; }
+  .service-num { font-size: 2rem; top: 1rem; right: 1rem; }
+  .service-title { font-size: 1.1rem; }
+  .service-text { font-size: 0.85rem; }
+  
+  .why { padding: 4rem 1.25rem; }
+  .why-inner { gap: 2rem; }
+  .why-right { grid-template-columns: 1fr; gap: 1rem; }
+  .why-card { padding: 1.25rem; }
+  
+  .sectors-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .sector-item { border-radius: 12px; }
+  .sector-content { padding: 1rem; }
+  .sector-name { font-size: 0.9rem; }
+  .sector-desc { display: none; }
+  
+  .process-steps { grid-template-columns: 1fr; gap: 1rem; }
+  .process-step { padding: 1.5rem 1rem; }
+  .step-circle { width: 48px; height: 48px; font-size: 1rem; }
+  
+  .contact { padding: 4rem 1.25rem; }
+  .contact-inner { gap: 2rem; }
+  .form-container { padding: 1.5rem; }
+  .form-grid { gap: 0.75rem; }
+  .submit-btn { padding: 0.9rem 1.5rem; font-size: 0.85rem; }
+  
+  footer { padding: 2rem 1.25rem; gap: 1rem; }
+  .footer-logo { font-size: 1rem; }
+  .footer-copy { font-size: 0.75rem; }
+  .footer-links { gap: 1.5rem; }
+  .footer-links a { font-size: 0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══════════════════════════════════════════════ -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <div class="nav-logo-icon">
+      <img src="logo.png" alt="Eco Air Solutions Logo">
+    </div>
+    Eco Air Solutions
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services" data-key="nav_services">Services</a></li>
+    <li><a href="#why" data-key="nav_why">Pourquoi nous</a></li>
+    <li><a href="#sectors" data-key="nav_sectors">Secteurs</a></li>
+    <li><a href="#process" data-key="nav_process">Processus</a></li>
+    <li><a href="#contact" data-key="nav_contact">Contact</a></li>
+  </ul>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')">ع</button>
+  </div>
+</nav>
+
+<!-- ══ HERO ═════════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-icon">
+    <div class="blade" style="--r:0deg"></div>
+    <div class="blade" style="--r:60deg"></div>
+    <div class="blade" style="--r:120deg"></div>
+    <div class="blade" style="--r:180deg"></div>
+    <div class="blade" style="--r:240deg"></div>
+    <div class="blade" style="--r:300deg"></div>
+  </div>
+
+  <div class="hero-gradient"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow" data-key="hero_eyebrow">Solutions CVC Écologiques · Algérie</p>
+
+    <h1 class="hero-title" data-lang-switch>
+      <span data-lang="fr" class="lang-active">
+        TECHNIQUE<br>
+        <span class="accent">ESTHÉTIQUE</span><br>
+        <span class="warm">CONFORT</span>
+      </span>
+      <span data-lang="en">
+        TECHNICAL<br>
+        <span class="accent">AESTHETIC</span><br>
+        <span class="warm">COMFORT</span>
+      </span>
+      <span data-lang="ar" style="font-family: 'Manrope', sans-serif; direction: rtl;">
+        تقني<br>
+        <span class="accent">جمالي</span><br>
+        <span class="warm">راحة</span>
+      </span>
+    </h1>
+
+    <p class="hero-sub" data-lang-switch>
+      <span data-lang="fr" class="lang-active">Études, installation et maintenance de systèmes CVC haute performance. Des solutions écoresponsables pour les bâtiments résidentiels, tertiaires et industriels en Algérie.</span>
+      <span data-lang="en">Engineering, installation and maintenance of high-performance HVAC systems. Eco-responsible solutions for residential, commercial and industrial buildings across Algeria.</span>
+      <span data-lang="ar" style="font-family: 'Inter', sans-serif; direction: rtl; line-height: 2;">دراسة وتركيب وصيانة أنظمة التكييف عالية الأداء. حلول صديقة للبيئة للمباني السكنية والتجارية والصناعية في الجزائر.</span>
+    </p>
+
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary" data-key="cta_devis">Demander un devis</a>
+      <a href="#services" class="btn-secondary" data-key="cta_services">
+        Nos services
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="stat-num">15+</div>
+      <div class="stat-label" data-key="stat_years">Années d'expérience</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-num">500+</div>
+      <div class="stat-label" data-key="stat_projects">Projets réalisés</div>
+    </div>
+      <div class="hero-stat">
+      <div class="stat-num">69</div>
+      <div class="stat-label" data-key="stat_wilayas">Wilayas couvertes</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-num">100%</div>
+      <div class="stat-label" data-key="stat_satisfaction">Satisfaction client</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVICES ══════════════════════════════════════════ -->
+<section class="services" id="services">
+  <div class="section-header reveal">
+    <div>
+      <p class="section-eyebrow" data-key="services_eyebrow">Ce que nous faisons</p>
+      <h2 class="section-title">
+        <span data-lang="fr" class="lang-active">NOS<br><span class="highlight">SERVICES</span></span>
+        <span data-lang="en">OUR<br><span class="highlight">SERVICES</span></span>
+      </h2>
+    </div>
+    <p class="section-desc" data-lang-switch>
+      <span data-lang="fr" class="lang-active">De la conception au suivi de maintenance, nous couvrons l'intégralité du cycle de vie de vos installations CVC avec une approche écoresponsable.</span>
+      <span data-lang="en">From design to ongoing maintenance, we cover the full lifecycle of your HVAC systems with an eco-responsible approach.</span>
+      <span data-lang="ar" style="font-family: 'Inter', sans-serif; direction: rtl; line-height: 1.8;">من التصميم إلى متابعة الصيانة، نغطي دورة الحياة الكاملة لتركيبات التكييف مع نهج صديق للبيئة.</span>
+    </p>
+  </div>
+
+  <div class="services-grid">
+
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 3H4a1 1 0 00-1 1v4a1 1 0 001 1h5a1 1 0 001-1V4a1 1 0 00-1-1z"/><path d="M9 13H4a1 1 0 00-1 1v4a1 1 0 001 1h5a1 1 0 001-1v-4a1 1 0 00-1-1z"/><path d="M20 3h-5a1 1 0 00-1 1v4a1 1 0 001 1h5a1 1 0 001-1V4a1 1 0 00-1-1z"/><path d="M20 13h-5a1 1 0 00-1 1v4a1 1 0 001 1h5a1 1 0 001-1v-4a1 1 0 00-1-1z"/></svg>
+      </div>
+      <h3 class="service-title">
+        <span data-lang="fr" class="lang-active">Étude & Conception</span>
+        <span data-lang="en">Study & Design</span>
+        <span data-lang="ar">الدراسة والتصميم</span>
+      </h3>
+      <p class="service-text" data-lang-switch>
+        <span data-lang="fr" class="lang-active">Calcul de charges thermiques, sélection des équipements, plans CVC, notes de calcul et dimensionnement complet avec optimisation énergétique.</span>
+        <span data-lang="en">Thermal load calculations, equipment selection, HVAC plans, engineering notes and complete system sizing with energy optimization.</span>
+        <span data-lang="ar" style="font-family: 'Inter', sans-serif; direction: rtl; line-height: 1.8;">حساب الأحمال الحرارية، اختيار المعدات، مخططات التكييف، ملاحظات التصميم والقياس الكامل مع تحسين الطاقة.</span>
+      </p>
+      <div class="service-tags">
+        <span class="tag">BIM/CAD</span>
+        <span class="tag">Thermique</span>
+        <span class="tag">Éconergie</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-num">02</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <h3 class="service-title">
+        <span data-lang="fr" class="lang-active">Réalisation</span>
+        <span data-lang="en">Installation</span>
+        <span data-lang="ar">التنفيذ والإنجاز</span>
+      </h3>
+      <p class="service-text" data-lang-switch>
+        <span data-lang="fr" class="lang-active">Installation complète de systèmes climatisation, ventilation, désenfumage, froid industriel et protection incendie par nos équipes certifiées.</span>
+        <span data-lang="en">Full installation of AC, ventilation, smoke extraction, industrial refrigeration and fire protection systems by our certified teams.</span>
+        <span data-lang="ar" style="font-family: 'Inter', sans-serif; direction: rtl; line-height: 1.8;">تركيب كامل لأنظمة التكييف والتهوية واستخلاص الدخان والتبريد الصناعي والحماية من الحرائق من قبل فرقنا المعتمدة.</span>
+      </p>
+      <div class="service-tags">
+        <span class="tag">CVC</span>
+        <span class="tag">VMC</span>
+        <span class="tag">Froid</span>
+        <span class="tag">Incendie</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-num">03</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3 class="service-title">
+        <span data-lang="fr" class="lang-active">Maintenance</span>
+        <span data-lang="en">Maintenance</span>
+        <span data-lang="ar">الصيانة</span>
+      </h3>
+      <p class="service-text" data-lang-switch>
+        <span data-lang="fr" class="lang-active">Contrats de maintenance préventive et curative, disponibilité 24/7 pour les urgences, garantie de performance et longévité de vos équipements.</span>
+        <span data-lang="en">Preventive and corrective maintenance contracts, 24/7 availability for emergencies, performance guarantees and equipment longevity.</span>
+        <span data-lang="ar" style="font-family: 'Inter', sans-serif; direction: rtl; line-height: 1.8;">عقود صيانة وقائية وتصحيحية، متاحة 24/7 للطوارئ، ضمان الأداء وطول عمر معداتكم.</span>
+      </p>
+      <div class="service-tags">
+        <span class="tag">Préventif</span>
+        <span class="tag">Curatif</span>
+        <span class="tag">24/7</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ WHY US ════════════════════════════════════════════ -->
+<section class="why" id="why">
+  <div class="why-inner">
+    <div class="why-left reveal">
+      <p class="section-eyebrow" data-key="why_eyebrow">Pourquoi nous choisir</p>
+      <h2 class="section-title">
+        <span data-lang="fr" class="lang-active">EXPERTISE<br><span class="highlight">LOCALE</span></span>
+        <span data-lang="en">LOCAL<br><span class="highlight">EXPERTISE</span></span>
+      </h2>
+      <p class="section-desc" data-lang-switch>
+        <span data-lang="fr" class="lang-active">Nous comprenons le marché algérien — ses contraintes climatiques, ses réglementations et ses besoins spécifiques. Chaque projet est traité avec rigueur, transparence et engagement environnemental.</span>
+        <span data-lang="en">We understand the Algerian market — its climate constraints, regulations and specific needs. Every project is handled with rigor, transparency and environmental commitment.</span>
+        <span data-lang="ar" style="font-family: 'Inter', sans-serif; direction: rtl; line-height: 1.8;">نفهم السوق الجزائرية — قيودها المناخية وأنظمتها ومتطلباتها. كل مشروع يعامل بصرامة وشفافية والالتزام البيئي.</span>
+      </p>
+    </div>
+
+    <div class="why-right reveal">
+      <div class="why-card">
+        <div class="why-card-icon">⚡</div>
+        <div class="why-card-title" data-lang-switch>
+          <span data-lang="fr" class="lang-active">Réactivité</span>
+          <span data-lang="en">Reactivity</span>
+          <span data-lang="ar">السرعة</span>
+        </div>
+        <p class="why-card-text" data-lang-switch>
+          <span data-lang="fr" class="lang-active">Intervention rapide sur tout le territoire. Diagnostic et devis sous 48h.</span>
+          <span data-lang="en">Fast response across Algeria. Diagnosis and quote within 48h.</span>
+          <span data-lang="ar">تدخل سريع في كل أرجاء الجزائر. تشخيص وعرض سعر في 48 ساعة.</span>
+        </p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-icon">🎓</div>
+        <div class="why-card-title" data-lang-switch>
+          <span data-lang="fr" class="lang-active">Expertise</span>
+          <span data-lang="en">Expertise</span>
+          <span data-lang="ar">الكفاءة</span>
+        </div>
+        <p class="why-card-text" data-lang-switch>
+          <span data-lang="fr" class="lang-active">Ingénieurs et techniciens certifiés, formation continue et veille technologique.</span>
+          <span data-lang="en">Qualified engineers and technicians with continuous training.</span>
+          <span data-lang="ar">مهندسون وتقنيون مؤهلون مع تكوين مستمر ومتابعة تقنية.</span>
+        </p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-icon">📋</div>
+        <div class="why-card-title" data-lang-switch>
+          <span data-lang="fr" class="lang-active">Conformité</span>
+          <span data-lang="en">Compliance</span>
+          <span data-lang="ar">المطابقة</span>
+        </div>
+        <p class="why-card-text" data-lang-switch>
+          <span data-lang="fr" class="lang-active">Respect des normes algériennes et internationales en vigueur (DTR, ISO, EN).</span>
+          <span data-lang="en">Adherence to Algerian and international standards (DTR, ISO, EN).</span>
+          <span data-lang="ar">احترام المعايير الجزائرية والدولية المعمول بها.</span>
+        </p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-icon">🌱</div>
+        <div class="why-card-title" data-lang-switch>
+          <span data-lang="fr" class="lang-active">Éco-responsable</span>
+          <span data-lang="en">Eco-responsible</span>
+          <span data-lang="ar">صديق للبيئة</span>
+        </div>
+        <p class="why-card-text" data-lang-switch>
+          <span data-lang="fr" class="lang-active">Solutions basse consommation et respect de l'environnement pour un avenir durable.</span>
+          <span data-lang="en">Low-consumption solutions and environmental respect for a sustainable future.</span>
+          <span data-lang="ar">حلول منخفضة الاستهلاك واحترام البيئة لمستقبل مستدام.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTORS ════════════════════════════════════════════ -->
+<section class="sectors" id="sectors">
+  <div class="section-header reveal" style="grid-template-columns: 1fr;">
+    <div>
+      <p class="section-eyebrow" data-key="sectors_eyebrow">Nos domaines d'intervention</p>
+      <h2 class="section-title">
+        <span data-lang="fr" class="lang-active">SECTEURS<br><span class="highlight">D'ACTIVITÉ</span></span>
+        <span data-lang="en">ACTIVITY<br><span class="highlight">SECTORS</span></span>
+      </h2>
+    </div>
+  </div>
+
+  <div class="sectors-grid reveal">
+
+    <div class="sector-item" data-lang-switch>
+      <div class="sector-img" style="background-image: url('sector-building.jpg');"></div>
+      <div class="sector-overlay"></div>
+      <div class="sector-content">
+        <p class="sector-name">
+          <span data-lang="fr" class="lang-active">Bâtiment</span>
+          <span data-lang="en">Building</span>
+          <span data-lang="ar">البناء</span>
+        </p>
+        <p class="sector-desc" data-lang-switch>
+          <span data-lang="fr" class="lang-active">Villas, appartements et résidentiel collectif. Solutions CVC sur mesure pour le confort thermique toute l'année.</span>
+          <span data-lang="en">Villas, apartments and collective housing. Custom HVAC solutions for year-round thermal comfort.</span>
+          <span data-lang="ar">الفيلات والشقق والسكن الجماعي. حلول تكييف مخصصة للراحة الحرارية على مدار السنة.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="sector-item" data-lang-switch>
+      <div class="sector-img" style="background-image: url('sector-commercial.jpg');"></div>
+      <div class="sector-overlay"></div>
+      <div class="sector-content">
+        <p class="sector-name">
+          <span data-lang="fr" class="lang-active">Tertiaire</span>
+          <span data-lang="en">Commercial</span>
+          <span data-lang="ar">التجاري</span>
+        </p>
+        <p class="sector-desc" data-lang-switch>
+          <span data-lang="fr" class="lang-active">Bureaux, centres commerciaux et espaces de travail. Systèmes centralisés à haute efficacité énergétique.</span>
+          <span data-lang="en">Offices, shopping centers and workspaces. Centralized systems with high energy efficiency.</span>
+          <span data-lang="ar">المكاتب ومراكز التسوق ومساحات العمل. أنظمة مركزية عالية الكفاءة في استهلاك الطاقة.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="sector-item" data-lang-switch>
+      <div class="sector-img" style="background-image: url('sector-healthcare.jpg');"></div>
+      <div class="sector-overlay"></div>
+      <div class="sector-content">
+        <p class="sector-name">
+          <span data-lang="fr" class="lang-active">Santé</span>
+          <span data-lang="en">Healthcare</span>
+          <span data-lang="ar">الصحة</span>
+        </p>
+        <p class="sector-desc" data-lang-switch>
+          <span data-lang="fr" class="lang-active">Hôpitaux, cliniques et laboratoires. Contrôle strict de l'air et filtration HEPA pour ambientes stériles.</span>
+          <span data-lang="en">Hospitals, clinics and laboratories. Strict air control and HEPA filtration for sterile environments.</span>
+          <span data-lang="ar">المستشفيات والعيادات والمختبرات. تحكم صارم في الهواء وتصفية HEPA للبيئات المعقمة.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="sector-item" data-lang-switch>
+      <div class="sector-img" style="background-image: url('sector-hospitality.jpg');"></div>
+      <div class="sector-overlay"></div>
+      <div class="sector-content">
+        <p class="sector-name">
+          <span data-lang="fr" class="lang-active">Hôtellerie</span>
+          <span data-lang="en">Hospitality</span>
+          <span data-lang="ar">الفندقة</span>
+        </p>
+        <p class="sector-desc" data-lang-switch>
+          <span data-lang="fr" class="lang-active">Hôtels, restaurants et spas. Solutions silencieuses et élégantes pour le confort des clients.</span>
+          <span data-lang="en">Hotels, restaurants and spas. Silent and elegant solutions for customer comfort.</span>
+          <span data-lang="ar">الفنادق والمطاعم والمنتجعات. حلول هادئة وأنيقة لراحة العملاء.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="sector-item" data-lang-switch>
+      <div class="sector-img" style="background-image: url('sector-industry.jpg');"></div>
+      <div class="sector-overlay"></div>
+      <div class="sector-content">
+        <p class="sector-name">
+          <span data-lang="fr" class="lang-active">Industrie</span>
+          <span data-lang="en">Industry</span>
+          <span data-lang="ar">الصناعة</span>
+        </p>
+        <p class="sector-desc" data-lang-switch>
+          <span data-lang="fr" class="lang-active">Usines, entrepôts et ateliers. Systèmes robustes pour le contrôle climatique des environnements de production.</span>
+          <span data-lang="en">Factories, warehouses and workshops. Robust systems for climate control of production environments.</span>
+          <span data-lang="ar">المصانع والمستودعات وورش العمل. أنظمة متينة للتحكم في المناخ في بيئات الإنتاج.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="sector-item" data-lang-switch>
+      <div class="sector-img" style="background-image: url('sector-food-industry.jpg');"></div>
+      <div class="sector-overlay"></div>
+      <div class="sector-content">
+        <p class="sector-name">
+          <span data-lang="fr" class="lang-active">Agroalimentaire</span>
+          <span data-lang="en">Food Industry</span>
+          <span data-lang="ar">الصناعات الغذائية</span>
+        </p>
+        <p class="sector-desc" data-lang-switch>
+          <span data-lang="fr" class="lang-active">Chaines de production et chambres froides. Contrôle température et hygrométrie pour la conservation alimentaire.</span>
+          <span data-lang="en">Production lines and cold rooms. Temperature and humidity control for food preservation.</span>
+          <span data-lang="ar">خطوط الإنتاج وغرف التبريد. التحكم في درجة الحرارة والرطوبة لحفظ الأغذية.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="sector-item" data-lang-switch>
+      <div class="sector-img" style="background-image: url('sector-energy.jpg');"></div>
+      <div class="sector-overlay"></div>
+      <div class="sector-content">
+        <p class="sector-name">
+          <span data-lang="fr" class="lang-active">Énergie</span>
+          <span data-lang="en">Energy</span>
+          <span data-lang="ar">الطاقة</span>
+        </p>
+        <p class="sector-desc" data-lang-switch>
+          <span data-lang="fr" class="lang-active">Centrales électriques et installations pétrochimiques. Solutions de refroidissement industriel haute performance.</span>
+          <span data-lang="en">Power plants and petrochemical facilities. High-performance industrial cooling solutions.</span>
+          <span data-lang="ar">محطات الطاقة والمنشآت البتروكيماوية. حلول التبريد الصناعي عالية الأداء.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="sector-item" data-lang-switch>
+      <div class="sector-img" style="background-image: url('sector-education.jpg');"></div>
+      <div class="sector-overlay"></div>
+      <div class="sector-content">
+        <p class="sector-name">
+          <span data-lang="fr" class="lang-active">Éducation</span>
+          <span data-lang="en">Education</span>
+          <span data-lang="ar">التعليم</span>
+        </p>
+        <p class="sector-desc" data-lang-switch>
+          <span data-lang="fr" class="lang-active">Écoles, universités et centres de formation. Environments d'apprentissage confortables avec qualité d'air optimale.</span>
+          <span data-lang="en">Schools, universities and training centers. Comfortable learning environments with optimal air quality.</span>
+          <span data-lang="ar">المدارس والجامعات ومراكز التدريب. بيئات تعليمية مريحة مع جودة هواء مثالية.</span>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ PROCESS ════════════════════════════════════════════ -->
+<section class="process" id="process">
+  <div class="section-header reveal">
+    <div>
+      <p class="section-eyebrow" data-key="process_eyebrow">Comment on travaille</p>
+      <h2 class="section-title">
+        <span data-lang="fr" class="lang-active">NOTRE<br><span class="highlight">PROCESSUS</span></span>
+        <span data-lang="en">OUR<br><span class="highlight">PROCESS</span></span>
+      </h2>
+    </div>
+    <p class="section-desc" data-lang-switch>
+      <span data-lang="fr" class="lang-active">Une méthodologie éprouvée en 4 étapes pour garantir la qualité et le respect de vos délais.</span>
+      <span data-lang="en">A proven 4-step methodology to guarantee quality and meet your deadlines.</span>
+      <span data-lang="ar" style="font-family: 'Inter', sans-serif; direction: rtl; line-height: 1.8;">منهجية مثبتة في 4 خطوات لضمان الجودة والالتزام بمواعيدكم.</span>
+    </p>
+  </div>
+
+  <div class="process-steps reveal">
+    <div class="process-step">
+      <div class="step-circle">01</div>
+      <h4 class="step-title" data-key="step1_title">Diagnostic</h4>
+      <p class="step-text" data-lang-switch>
+        <span data-lang="fr" class="lang-active">Visite technique et analyse de vos besoins sur site.</span>
+        <span data-lang="en">Site visit and technical needs assessment.</span>
+        <span data-lang="ar" style="font-family: 'Inter', sans-serif; direction: rtl; line-height: 1.7;">زيارة تقنية وتحليل احتياجاتكم في الموقع.</span>
+      </p>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">02</div>
+      <h4 class="step-title" data-key="step2_title">Conception</h4>
+      <p class="step-text" data-lang-switch>
+        <span data-lang="fr" class="lang-active">Étude technique, plans et devis détaillé sous 48h.</span>
+        <span data-lang="en">Technical study, plans and detailed quote within 48h.</span>
+        <span data-lang="ar" style="font-family: 'Inter', sans-serif; direction: rtl; line-height: 1.7;">دراسة تقنية وخطط وعرض مفصل في 48 ساعة.</span>
+      </p>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">03</div>
+      <h4 class="step-title" data-key="step3_title">Réalisation</h4>
+      <p class="step-text" data-lang-switch>
+        <span data-lang="fr" class="lang-active">Exécution par nos techniciens certifiés, suivi de chantier rigoureux.</span>
+        <span data-lang="en">Execution by certified technicians with strict site supervision.</span>
+        <span data-lang="ar" style="font-family: 'Inter', sans-serif; direction: rtl; line-height: 1.7;">تنفيذ من قبل فنيين معتمدين مع متابعة صارمة للموقع.</span>
+      </p>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">04</div>
+      <h4 class="step-title" data-key="step4_title">Maintenance</h4>
+      <p class="step-text" data-lang-switch>
+        <span data-lang="fr" class="lang-active">Mise en service, formation utilisateurs et contrat de suivi.</span>
+        <span data-lang="en">Commissioning, user training and ongoing maintenance contract.</span>
+        <span data-lang="ar" style="font-family: 'Inter', sans-serif; direction: rtl; line-height: 1.7;">تشغيل وتدريب المستخدمين وعقد صيانة مستمر.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ════════════════════════════════════════════ -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-left reveal">
+      <p class="section-eyebrow" data-key="contact_eyebrow">Parlons de votre projet</p>
+      <h2 class="section-title">
+        <span data-lang="fr" class="lang-active">DEMANDEZ<br><span class="highlight">UN DEVIS</span></span>
+        <span data-lang="en">REQUEST<br><span class="highlight">A QUOTE</span></span>
+      </h2>
+      <p data-lang-switch>
+        <span data-lang="fr" class="lang-active">Décrivez votre projet, nous vous répondons sous 24h avec une analyse préliminaire et un devis indicatif. Gratuit et sans engagement.</span>
+        <span data-lang="en">Describe your project and we'll respond within 24h with a preliminary analysis and indicative quote. Free and non-binding.</span>
+        <span data-lang="ar" style="font-family: 'Inter', sans-serif; direction: rtl; line-height: 1.8;">صف مشروعك وسنجيب خلال 24 ساعة مع تحليل أولي وعرض سعر استرشادي. مجاني وغير ملزم.</span>
+      </p>
+
+      <div class="contact-info">
+        <div class="contact-row">
+          <div class="contact-row-icon">📍</div>
+          <span data-key="addr">Ouled Fayet, Algérie</span>
+        </div>
+        <div class="contact-row">
+          <div class="contact-row-icon">📞</div>
+          <a href="tel:+2130799967458" class="contact-link">+213 0799 96 74 58</a>
+        </div>
+        <div class="contact-row">
+          <div class="contact-row-icon">✉️</div>
+          <a href="mailto:ecoairsolutions909@gmail.com" class="contact-link">ecoairsolutions909@gmail.com</a>
+        </div>
+        <div class="contact-row">
+          <div class="contact-row-icon">🕐</div>
+          <span data-key="hours">Dim – Jeu · 8h00 – 17h30</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="form-container">
+        <div data-fs-success class="form-success" style="display: none;">
+          <div class="success-icon">✓</div>
+          <h3 class="success-title" data-lang-switch>
+            <span data-lang="fr" class="lang-active">Message envoyé !</span>
+            <span data-lang="en">Message sent!</span>
+            <span data-lang="ar">تم إرسال الرسالة!</span>
+          </h3>
+          <p class="success-msg" data-lang-switch>
+            <span data-lang="fr" class="lang-active">Merci pour votre demande. Nous vous répondrons dans les plus brefs délais.</span>
+            <span data-lang="en">Thank you for your request. We will respond as soon as possible.</span>
+            <span data-lang="ar">شكراً على طلبكم. سنجيب في أقرب وقت ممكن.</span>
+          </p>
+        </div>
+        <div data-fs-error class="form-error" style="display: none;"></div>
+        <form id="contact-form" class="form-grid">
+          <div class="form-group">
+            <label data-key="f_name">Nom complet</label>
+            <input type="text" name="Nom complet" data-fs-field placeholder="Ahmed Benali" required>
+          </div>
+          <div class="form-group">
+            <label data-key="f_phone">Téléphone</label>
+            <input type="tel" name="Téléphone" data-fs-field placeholder="+213 05X XXX XXXX" required>
+          </div>
+          <div class="form-group">
+            <label data-key="f_email">Email</label>
+            <input type="email" name="Email" data-fs-field placeholder="vous@exemple.dz" required>
+          </div>
+          <div class="form-group">
+            <label data-key="f_wilaya">Wilaya</label>
+            <select id="wilaya-select" name="Wilaya" data-fs-field>
+              <option value="1" data-ar="أدرار">Adrar</option>
+              <option value="2" data-ar="الشلف">Chlef</option>
+              <option value="3" data-ar="الأغواط">Laghouat</option>
+              <option value="4" data-ar="أم البواقي">Oum El Bouaghi</option>
+              <option value="5" data-ar="باتنة">Batna</option>
+              <option value="6" data-ar="بجاية">Béjaïa</option>
+              <option value="7" data-ar="بسكرة">Biskra</option>
+              <option value="8" data-ar="بشار">Béchar</option>
+              <option value="9" data-ar="البليدة">Blida</option>
+              <option value="10" data-ar="البويرة">Bouira</option>
+              <option value="11" data-ar="تمنراست">Tamanrasset</option>
+              <option value="12" data-ar="تبسة">Tébessa</option>
+              <option value="13" data-ar="تلمسان">Tlemcen</option>
+              <option value="14" data-ar="تيارت">Tiaret</option>
+              <option value="15" data-ar="تيزي وزو">Tizi Ouzou</option>
+              <option value="16" data-ar="الجزائر" selected>Alger</option>
+              <option value="17" data-ar="الجلفة">Djelfa</option>
+              <option value="18" data-ar="جيجل">Jijel</option>
+              <option value="19" data-ar="سطيف">Sétif</option>
+              <option value="20" data-ar="سعيدة">Saïda</option>
+              <option value="21" data-ar="سكيكدة">Skikda</option>
+              <option value="22" data-ar="سيدي بلعباس">Sidi Bel Abbès</option>
+              <option value="23" data-ar="عنابة">Annaba</option>
+              <option value="24" data-ar="قالمة">Guelma</option>
+              <option value="25" data-ar="قسنطينة">Constantine</option>
+              <option value="26" data-ar="المدية">Médéa</option>
+              <option value="27" data-ar="مستغانم">Mostaganem</option>
+              <option value="28" data-ar="المسيلة">M'Sila</option>
+              <option value="29" data-ar="معسكر">Mascara</option>
+              <option value="30" data-ar="ورقلة">Ouargla</option>
+              <option value="31" data-ar="وهران">Oran</option>
+              <option value="32" data-ar="البيض">El Bayadh</option>
+              <option value="33" data-ar="إليزي">Illizi</option>
+              <option value="34" data-ar="برج بوعريريج">Bordj Bou Arréridj</option>
+              <option value="35" data-ar="بومرداس">Boumerdès</option>
+              <option value="36" data-ar="الطارف">El Tarf</option>
+              <option value="37" data-ar="تندوف">Tindouf</option>
+              <option value="38" data-ar="تيسمسيلت">Tissemsilt</option>
+              <option value="39" data-ar="الوادي">El Oued</option>
+              <option value="40" data-ar="خنشلة">Khenchela</option>
+              <option value="41" data-ar="سوق أهراس">Souk Ahras</option>
+              <option value="42" data-ar="تيبازة">Tipaza</option>
+              <option value="43" data-ar="ميلة">Mila</option>
+              <option value="44" data-ar="عين الدفلى">Aïn Defla</option>
+              <option value="45" data-ar="النعامة">Naâma</option>
+              <option value="46" data-ar="عين تموشنت">Aïn Témouchent</option>
+              <option value="47" data-ar="غرداية">Ghardaïa</option>
+              <option value="48" data-ar="غليزان">Relizane</option>
+              <option value="49" data-ar="المغير">El M'Ghair</option>
+              <option value="50" data-ar="المنيعة">El Méniaa</option>
+              <option value="51" data-ar="أولاد جلال">Ouled Djellal</option>
+              <option value="52" data-ar="برج باجي مختار">Bordj Badji Mokhtar</option>
+              <option value="53" data-ar="بني عباس">Béni Abbès</option>
+              <option value="54" data-ar="تيميمون">Timimoun</option>
+              <option value="55" data-ar="تقرت">Touggourt</option>
+              <option value="56" data-ar="جانت">Djanet</option>
+              <option value="57" data-ar="عين صالح">In Salah</option>
+              <option value="58" data-ar="عين قزام">In Guezzam</option>
+              <option value="59" data-ar="أفلو">Aflou</option>
+              <option value="60" data-ar="بريكة">Bir El Ater</option>
+              <option value="61" data-ar="القنطرة">El Qantara</option>
+              <option value="62" data-ar="العليات">El Alia</option>
+              <option value="63" data-ar="الأريش">El Aricha</option>
+              <option value="64" data-ar="قشلالة">Ksar Chellala</option>
+              <option value="65" data-ar="عين وسارة">Aïn Oussera</option>
+              <option value="66" data-ar="مساعد">M'saâd</option>
+              <option value="67" data-ar="قصر البخاري">Ksar El Boukhari</option>
+              <option value="68" data-ar="بوسعادة">Boussaâda</option>
+              <option value="69" data-ar="العبادلة">El Abiodh Sidi Cheikh</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label data-key="f_sector">Secteur</label>
+            <select name="Secteur" data-fs-field>
+              <option data-key="f_s1">Bâtiment résidentiel</option>
+              <option data-key="f_s2">Tertiaire / Bureaux</option>
+              <option data-key="f_s3">Industrie</option>
+              <option data-key="f_s4">Santé</option>
+              <option data-key="f_s5">Hôtellerie</option>
+              <option data-key="f_s6">Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label data-key="f_service">Service souhaité</label>
+            <select name="Service" data-fs-field>
+              <option>Étude & Conception</option>
+              <option>Réalisation</option>
+              <option>Maintenance</option>
+              <option>Étude + Réalisation</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label data-key="f_desc">Description du projet</label>
+            <textarea id="project-desc" name="Description" data-fs-field placeholder="Décrivez votre projet : type de bâtiment, superficie, besoins spécifiques..."></textarea>
+          </div>
+          <button type="submit" class="submit-btn" data-key="f_submit" data-fs-submit-btn>Envoyer la demande</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════════════ -->
+<footer>
+  <a href="#home" class="footer-logo">
+    <div class="footer-logo-icon">
+      <img src="logo.png" alt="Eco Air Solutions Logo">
+    </div>
+    Eco Air Solutions
+  </a>
+  <p class="footer-copy">© 2026 Eco Air Solutions · Solutions CVC Écologiques · Algérie</p>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#sectors">Secteurs</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+// ── TRANSLATIONS ─────────────────────────────────────────
+const T = {
+  fr: {
+    nav_services: 'Services', nav_why: 'Pourquoi nous', nav_sectors: 'Secteurs',
+    nav_process: 'Processus', nav_contact: 'Contact',
+    hero_eyebrow: 'Solutions CVC Écologiques · Algérie',
+    cta_devis: 'Demander un devis', cta_services: 'Nos services',
+    stat_years: "Années d'expérience", stat_projects: 'Projets réalisés',
+    stat_wilayas: 'Wilayas couvertes', stat_satisfaction: 'Satisfaction client',
+    services_eyebrow: 'Ce que nous faisons',
+    s1_title: 'Étude & Conception', s2_title: 'Réalisation', s3_title: 'Maintenance',
+    why_eyebrow: 'Pourquoi nous choisir',
+    why1_title: 'Réactivité', why1_text: 'Intervention rapide sur tout le territoire. Diagnostic et devis sous 48h.',
+    why2_title: 'Expertise', why2_text: 'Ingénieurs et techniciens certifiés, formation continue et veille technologique.',
+    why3_title: 'Conformité', why3_text: 'Respect des normes algériennes et internationales (DTR, ISO, EN).',
+    why4_title: 'Éco-responsable', why4_text: 'Solutions basse consommation et respect de l\'environnement pour un avenir durable.',
+    sectors_eyebrow: "Nos domaines d'intervention",
+    sec1:'Bâtiment',sec2:'Tertiaire',sec3:'Santé',sec4:'Hôtellerie',sec5:'Industrie',sec6:'Agroalimentaire',sec7:'Énergie',sec8:'Éducation',
+    sec1_desc:'Villas, appartements et résidentiel collectif. Solutions CVC sur mesure pour le confort thermique toute l\'année.',
+    sec2_desc:'Bureaux, centres commerciaux et espaces de travail. Systèmes centralisés à haute efficacité énergétique.',
+    sec3_desc:'Hôpitaux, cliniques et laboratoires. Contrôle strict de l\'air et filtration HEPA pour ambientes stériles.',
+    sec4_desc:'Hôtels, restaurants et spas. Solutions silencieuses et élégantes pour le confort des clients.',
+    sec5_desc:'Usines, entrepôts et ateliers. Systèmes robustes pour le contrôle climatique des environnements de production.',
+    sec6_desc:'Chaines de production et chambres froides. Contrôle température et hygrométrie pour la conservation alimentaire.',
+    sec7_desc:'Centrales électriques et installations pétrochimiques. Solutions de refroidissement industriel haute performance.',
+    sec8_desc:'Écoles, universités et centres de formation. Environments d\'apprentissage confortables avec qualité d\'air optimale.',
+    process_eyebrow: 'Comment on travaille',
+    step1_title:'Diagnostic', step2_title:'Conception', step3_title:'Réalisation', step4_title:'Maintenance',
+    contact_eyebrow: 'Parlons de votre projet',
+    addr: 'Ouled Fayet, Algérie', hours: 'Dim – Jeu · 8h00 – 17h30',
+    f_name: 'Nom complet', f_phone: 'Téléphone', f_email: 'Email',
+    f_wilaya: 'Wilaya', f_sector: 'Secteur', f_service: 'Service souhaité',
+    f_desc: 'Description du projet', f_submit: 'Envoyer la demande',
+    f_desc_placeholder: 'Décrivez votre projet : type de bâtiment, superficie, besoins spécifiques...',
+  },
+  en: {
+    nav_services:'Services', nav_why:'Why us', nav_sectors:'Sectors',
+    nav_process:'Process', nav_contact:'Contact',
+    hero_eyebrow:'Eco HVAC Solutions · Algeria',
+    cta_devis:'Request a quote', cta_services:'Our services',
+    stat_years:'Years of experience', stat_projects:'Projects completed',
+    stat_wilayas:'Wilayas covered', stat_satisfaction:'Client satisfaction',
+    services_eyebrow:'What we do',
+    s1_title:'Study & Design', s2_title:'Installation', s3_title:'Maintenance',
+    why_eyebrow:'Why choose us',
+    why1_title:'Reactivity', why1_text:'Fast response across Algeria. Diagnosis and quote within 48h.',
+    why2_title:'Expertise', why2_text:'Qualified engineers and technicians with continuous training.',
+    why3_title:'Compliance', why3_text:'Adherence to Algerian and international standards (DTR, ISO, EN).',
+    why4_title:'Eco-responsible', why4_text:'Low-consumption solutions and environmental respect for a sustainable future.',
+    sectors_eyebrow:'Our fields of intervention',
+    sec1:'Building',sec2:'Commercial',sec3:'Healthcare',sec4:'Hospitality',sec5:'Industry',sec6:'Food Industry',sec7:'Energy',sec8:'Education',
+    sec1_desc:'Villas, apartments and collective housing. Custom HVAC solutions for year-round thermal comfort.',
+    sec2_desc:'Offices, shopping centers and workspaces. Centralized systems with high energy efficiency.',
+    sec3_desc:'Hospitals, clinics and laboratories. Strict air control and HEPA filtration for sterile environments.',
+    sec4_desc:'Hotels, restaurants and spas. Silent and elegant solutions for customer comfort.',
+    sec5_desc:'Factories, warehouses and workshops. Robust systems for climate control of production environments.',
+    sec6_desc:'Production lines and cold rooms. Temperature and humidity control for food preservation.',
+    sec7_desc:'Power plants and petrochemical facilities. High-performance industrial cooling solutions.',
+    sec8_desc:'Schools, universities and training centers. Comfortable learning environments with optimal air quality.',
+    process_eyebrow:'How we work',
+    step1_title:'Assessment', step2_title:'Design', step3_title:'Installation', step4_title:'Maintenance',
+    contact_eyebrow:'Talk about your project',
+    addr:'Ouled Fayet, Algeria', hours:'Sun – Thu · 8:00 AM – 5:30 PM',
+    f_name:'Full name', f_phone:'Phone', f_email:'Email',
+    f_wilaya:'Province', f_sector:'Sector', f_service:'Service needed',
+    f_desc:'Project description', f_submit:'Send request',
+    f_desc_placeholder:'Describe your project: building type, area, specific needs...',
+  },
+  ar: {
+    nav_services:'الخدمات', nav_why:'لماذا نحن', nav_sectors:'القطاعات',
+    nav_process:'العملية', nav_contact:'اتصل بنا',
+    hero_eyebrow:'حلول التكييف الصديقة للبيئة · الجزائر',
+    cta_devis:'اطلب عرض سعر', cta_services:'خدماتنا',
+    stat_years:'سنوات خبرة', stat_projects:'مشروع منجز',
+    stat_wilayas:'ولاية مغطاة', stat_satisfaction:'رضا العملاء',
+    services_eyebrow:'ما نقدمه',
+    s1_title:'الدراسة والتصميم', s2_title:'التنفيذ والإنجاز', s3_title:'الصيانة',
+    why_eyebrow:'لماذا تختارنا',
+    why1_title:'السرعة', why1_text:'تدخل سريع في كل أرجاء الجزائر. تشخيص وعرض سعر في 48 ساعة.',
+    why2_title:'الكفاءة', why2_text:'مهندسون وتقنيون مؤهلون مع تكوين مستمر ومتابعة تقنية.',
+    why3_title:'المطابقة', why3_text:'احترام المعايير الجزائرية والدولية المعمول بها.',
+    why4_title:'صديق للبيئة', why4_text:'حلول منخفضة الاستهلاك واحترام البيئة لمستقبل مستدام.',
+    sectors_eyebrow:'مجالات تدخلنا',
+    sec1:'البناء',sec2:'التجاري',sec3:'الصحة',sec4:'الفندقة',sec5:'الصناعة',sec6:'الغذاء',sec7:'الطاقة',sec8:'التعليم',
+    sec1_desc:'الفيلات والشقق والسكن الجماعي. حلول تكييف مخصصة للراحة الحرارية على مدار السنة.',
+    sec2_desc:'المكاتب ومراكز التسوق ومساحات العمل. أنظمة مركزية عالية الكفاءة في استهلاك الطاقة.',
+    sec3_desc:'المستشفيات والعيادات والمختبرات. تحكم صارم في الهواء وتصفية HEPA للبيئات المعقمة.',
+    sec4_desc:'الفنادق والمطاعم والمنتجعات. حلول هادئة وأنيقة لراحة العملاء.',
+    sec5_desc:'المصانع والمستودعات وورش العمل. أنظمة متينة للتحكم في المناخ في بيئات الإنتاج.',
+    sec6_desc:'خطوط الإنتاج وغرف التبريد. التحكم في درجة الحرارة والرطوبة لحفظ الأغذية.',
+    sec7_desc:'محطات الطاقة والمنشآت البتروكيماوية. حلول التبريد الصناعي عالية الأداء.',
+    sec8_desc:'المدارس والجامعات ومراكز التدريب. بيئات تعليمية مريحة مع جودة هواء مثالية.',
+    process_eyebrow:'كيف نعمل',
+    step1_title:'التشخيص', step2_title:'التصميم', step3_title:'التنفيذ', step4_title:'الصيانة',
+    contact_eyebrow:'تحدث عن مشروعك',
+    addr:'أولاد فايت، الجزائر', hours:'الأحد – الخميس · 8:00 – 17:30',
+    f_name:'الاسم الكامل', f_phone:'الهاتف', f_email:'البريد الإلكتروني',
+    f_wilaya:'الولاية', f_sector:'القطاع', f_service:'الخدمة المطلوبة',
+    f_desc:'وصف المشروع', f_submit:'إرسال الطلب',
+    f_desc_placeholder:'صف مشروعك: نوع المبنى، المساحة، الاحتياجات المحددة...',
+  }
+};
+
+let currentLang = localStorage.getItem('lang') || 'fr';
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    const shouldShow = el.getAttribute('data-lang') === lang;
+    el.style.display = shouldShow ? '' : 'none';
+    if (shouldShow && el.classList.contains('lang-active') === false) {
+      el.classList.add('lang-active');
+    } else if (!shouldShow && el.classList.contains('lang-active')) {
+      el.classList.remove('lang-active');
+    }
+  });
+
+  const dict = T[lang];
+  document.querySelectorAll('[data-key]').forEach(el => {
+    if (el.querySelector('[data-lang]')) return;
+    const k = el.getAttribute('data-key');
+    if (dict[k]) el.textContent = dict[k];
+  });
+
+  const textarea = document.getElementById('project-desc');
+  if (textarea && dict.f_desc_placeholder) {
+    textarea.placeholder = dict.f_desc_placeholder;
+  }
+
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.documentElement.lang = lang;
+
+  if (lang === 'ar') {
+    document.body.style.fontFamily = "'Inter', 'Noto Kufi Arabic', sans-serif";
+  } else {
+    document.body.style.fontFamily = "'Inter', sans-serif";
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    const btnLang = b.textContent.trim().toLowerCase().replace('ع','ar');
+    b.classList.toggle('active', btnLang === lang);
+  });
+}
+
+document.querySelectorAll('[data-lang]').forEach(el => {
+  const lang = el.getAttribute('data-lang');
+  el.style.display = lang === currentLang ? '' : 'none';
+  if (lang === currentLang) {
+    el.classList.add('lang-active');
+  } else {
+    el.classList.remove('lang-active');
+  }
+});
+
+setLang(currentLang);
+
+// ── SCROLL REVEAL ─────────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Formspree AJAX
+window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+formspree('initForm', { formElement: '#contact-form', formId: 'mdappbap' });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+</body>
+</html>
