@@ -1026,6 +1026,64 @@ textarea {
   min-height: 120px;
 }
 
+.multi-select {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: var(--surface-container-high);
+  border-radius: 8px;
+  border-bottom: 2px solid transparent;
+  min-height: 48px;
+  align-items: center;
+}
+
+.multi-select:focus-within {
+  background: var(--surface-container);
+  border-bottom-color: var(--primary);
+}
+
+.multi-select-input {
+  flex: 1;
+  min-width: 150px;
+  border: none !important;
+  background: transparent !important;
+  padding: 0.25rem !important;
+  font-size: 0.9rem;
+}
+
+.multi-select-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.multi-select-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.multi-select-tag button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.multi-select-tag button:hover {
+  opacity: 1;
+}
+
 .submit-btn {
   grid-column: 1/-1;
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
@@ -1904,23 +1962,50 @@ footer {
           </div>
           <div class="form-group">
             <label data-key="f_sector">Secteur</label>
-            <select name="Secteur" data-fs-field>
-              <option data-key="f_s1">Bâtiment résidentiel</option>
-              <option data-key="f_s2">Tertiaire / Bureaux</option>
-              <option data-key="f_s3">Industrie</option>
-              <option data-key="f_s4">Santé</option>
-              <option data-key="f_s5">Hôtellerie</option>
-              <option data-key="f_s6">Autre</option>
-            </select>
+            <input list="sector-list" name="Secteur" data-fs-field placeholder="Sélectionnez ou tapez..." required>
+            <datalist id="sector-list">
+              <option value="Bâtiment résidentiel">
+              <option value="Tertiaire / Bureaux">
+              <option value="Industrie">
+              <option value="Santé">
+              <option value="Hôtellerie">
+              <option value="Commerce">
+              <option value="Éducation">
+              <option value="Autre">
+            </datalist>
           </div>
           <div class="form-group">
             <label data-key="f_service">Service souhaité</label>
-            <select name="Service" data-fs-field>
-              <option>Étude & Conception</option>
-              <option>Réalisation</option>
-              <option>Maintenance</option>
-              <option>Étude + Réalisation</option>
-            </select>
+            <div class="multi-select" id="multi-service">
+              <input type="text" class="multi-select-input" list="service-list" placeholder="Sélectionnez ou tapez..." autocomplete="off">
+              <datalist id="service-list">
+                <option value="Étude">
+                <option value="Réalisation">
+                <option value="Maintenance">
+              </datalist>
+              <div class="multi-select-tags"></div>
+              <input type="hidden" name="Service">
+            </div>
+          </div>
+          <div class="form-group full">
+            <label data-key="f_type">Type de service</label>
+            <div class="multi-select" id="multi-service-types">
+              <input type="text" class="multi-select-input" list="service-types-list" placeholder="Sélectionnez ou tapez..." autocomplete="off">
+              <datalist id="service-types-list">
+                <option value="Climatisation">
+                <option value="Ventilation">
+                <option value="Traitement de l'air">
+                <option value="Désenfumage">
+                <option value="Chauffage">
+                <option value="Fluides médicaux">
+                <option value="Détection incendie">
+                <option value="Protection incendie">
+                <option value="Électricité">
+                <option value="Régulation">
+              </datalist>
+              <div class="multi-select-tags"></div>
+              <input type="hidden" name="Type de service">
+            </div>
           </div>
           <div class="form-group full">
             <label data-key="f_desc">Description du projet</label>
@@ -1990,7 +2075,7 @@ const T = {
     contact_eyebrow: 'Parlons de votre projet',
     addr: 'Ouled Fayet, Algérie', hours: 'Dim – Jeu · 8h00 – 17h30',
     f_name: 'Nom complet', f_phone: 'Téléphone', f_email: 'Email',
-    f_wilaya: 'Wilaya', f_sector: 'Secteur', f_service: 'Service souhaité',
+    f_wilaya: 'Wilaya', f_sector: 'Secteur', f_service: 'Service souhaité', f_type: 'Type de service',
     f_desc: 'Description du projet', f_submit: 'Envoyer la demande',
     f_desc_placeholder: 'Décrivez votre projet : type de bâtiment, superficie, besoins spécifiques...',
   },
@@ -2023,7 +2108,7 @@ const T = {
     contact_eyebrow:'Talk about your project',
     addr:'Ouled Fayet, Algeria', hours:'Sun – Thu · 8:00 AM – 5:30 PM',
     f_name:'Full name', f_phone:'Phone', f_email:'Email',
-    f_wilaya:'Province', f_sector:'Sector', f_service:'Service needed',
+    f_wilaya:'Province', f_sector:'Sector', f_service:'Service needed', f_type:'Service type',
     f_desc:'Project description', f_submit:'Send request',
     f_desc_placeholder:'Describe your project: building type, area, specific needs...',
   },
@@ -2056,7 +2141,7 @@ const T = {
     contact_eyebrow:'تحدث عن مشروعك',
     addr:'أولاد فايت، الجزائر', hours:'الأحد – الخميس · 8:00 – 17:30',
     f_name:'الاسم الكامل', f_phone:'الهاتف', f_email:'البريد الإلكتروني',
-    f_wilaya:'الولاية', f_sector:'القطاع', f_service:'الخدمة المطلوبة',
+    f_wilaya:'الولاية', f_sector:'القطاع', f_service:'الخدمة المطلوبة', f_type:'نوع الخدمة',
     f_desc:'وصف المشروع', f_submit:'إرسال الطلب',
     f_desc_placeholder:'صف مشروعك: نوع المبنى، المساحة، الاحتياجات المحددة...',
   }
@@ -2145,7 +2230,91 @@ lazyImages.forEach(img => imageObserver.observe(img));
 
 // Formspree AJAX
 window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
-formspree('initForm', { formElement: '#contact-form', formId: 'mdappbap' });
+formspree('initForm', { 
+  formElement: '#contact-form', 
+  formId: 'mdappbap',
+  onSuccess: function() {
+    // Clear multi-select tags on success
+    document.querySelectorAll('.multi-select').forEach(function(container) {
+      container.querySelector('input[type="hidden"]').value = '';
+      container.querySelector('.multi-select-tags').innerHTML = '';
+    });
+  }
+});
+
+// Multi-select for service types
+function initMultiSelect(containerId, listId) {
+  const container = document.getElementById(containerId);
+  const input = container.querySelector('.multi-select-input');
+  const tags = container.querySelector('.multi-select-tags');
+  const hiddenInput = container.querySelector('input[type="hidden"]');
+  let selectedValues = [];
+
+  function updateHidden() {
+    hiddenInput.value = selectedValues.join(', ');
+  }
+
+  function createTag(value) {
+    const tag = document.createElement('span');
+    tag.className = 'multi-select-tag';
+    tag.innerHTML = `${value}<button type="button" data-value="${value}">&times;</button>`;
+    tag.querySelector('button').onclick = function() {
+      selectedValues = selectedValues.filter(v => v !== value);
+      tag.remove();
+      updateHidden();
+    };
+    return tag;
+  }
+
+  function addTag(value) {
+    if (!value || selectedValues.includes(value)) return;
+    selectedValues.push(value);
+    tags.appendChild(createTag(value));
+    input.value = '';
+    updateHidden();
+  }
+
+  input.addEventListener('input', function() {
+    const value = this.value.trim();
+    const options = document.querySelectorAll(`#${listId} option`);
+    const match = Array.from(options).find(opt => opt.value.toLowerCase() === value.toLowerCase());
+    if (match) addTag(match.value);
+  });
+
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      addTag(this.value.trim());
+    } else if (e.key === 'Backspace' && this.value === '' && selectedValues.length > 0) {
+      const lastTag = tags.lastElementChild;
+      if (lastTag) lastTag.querySelector('button').click();
+    }
+  });
+}
+
+initMultiSelect('multi-service', 'service-list');
+initMultiSelect('multi-service-types', 'service-types-list');
+
+// Ensure multi-select values are sent on form submit
+document.getElementById('contact-form').addEventListener('submit', function() {
+  // Force update all hidden inputs
+  document.querySelectorAll('.multi-select input[type="hidden"]').forEach(function(h) {
+    h.disabled = false;
+  });
+});
+
+// Reset multi-select on successful form submission
+document.querySelectorAll('.multi-select').forEach(function(container) {
+  const hiddenInput = container.querySelector('input[type="hidden"]');
+  const tagsContainer = container.querySelector('.multi-select-tags');
+  
+  // Observe for reset
+  const form = document.getElementById('contact-form');
+  form.addEventListener('reset', function() {
+    hiddenInput.value = '';
+    tagsContainer.innerHTML = '';
+  });
+});
 </script>
 <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
