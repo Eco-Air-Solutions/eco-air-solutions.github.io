@@ -2052,6 +2052,7 @@ footer {
 // ── TRANSLATIONS ─────────────────────────────────────────
 const T = {
   fr: {
+    page_title: 'Eco Air Solutions | Expert CVC & Climatisation en Algérie',
     nav_services: 'Services', nav_why: 'Pourquoi nous', nav_sectors: 'Secteurs',
     nav_process: 'Processus', nav_contact: 'Contact',
     hero_eyebrow: 'Solutions CVC Écologiques · Algérie',
@@ -2085,6 +2086,7 @@ const T = {
     f_desc_placeholder: 'Décrivez votre projet : type de bâtiment, superficie, besoins spécifiques...',
   },
   en: {
+    page_title:'Eco Air Solutions | Expert HVAC & Air Conditioning in Algeria',
     nav_services:'Services', nav_why:'Why us', nav_sectors:'Sectors',
     nav_process:'Process', nav_contact:'Contact',
     hero_eyebrow:'Eco HVAC Solutions · Algeria',
@@ -2118,6 +2120,7 @@ const T = {
     f_desc_placeholder:'Describe your project: building type, area, specific needs...',
   },
   ar: {
+    page_title:'Eco Air Solutions | حلول التكييف والتهوية في الجزائر',
     nav_services:'الخدمات', nav_why:'ما يميزنا', nav_sectors:'القطاعات',
     nav_process:'العملية', nav_contact:'اتصل بنا',
     hero_eyebrow:'حلول التكييف الصديقة للبيئة · الجزائر',
@@ -2174,6 +2177,13 @@ function setLang(lang) {
     const k = el.getAttribute('data-key');
     if (dict[k]) el.textContent = dict[k];
   });
+
+  // Update page title and meta tags
+  if (dict.page_title) {
+    document.title = dict.page_title;
+    document.querySelector('meta[property="og:title"]').content = dict.page_title;
+    document.querySelector('meta[name="twitter:title"]').content = dict.page_title;
+  }
 
   const textarea = document.getElementById('project-desc');
   if (textarea && dict.f_desc_placeholder) {
