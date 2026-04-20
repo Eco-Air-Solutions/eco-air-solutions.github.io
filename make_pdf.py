@@ -328,10 +328,10 @@ y -= 15
 
 # Grille climatisation
 clim_brands = [
-    ("samsung-logo_logoshape.com.png", "Samsung"),
-    ("lg-vector-logo_logoshape.com.png", "LG"),
-    ("cropped-logo-condor-light.png", "Condor"),
-    ("TraneLogo_red.png", "Trane"),
+    ("samsung-logo.png", "Samsung"),
+    ("lg-logo.png", "LG"),
+    ("condor-logo.png", "Condor"),
+    ("trane-logo.png", "Trane"),
     ("ciat-logo.png", "CIAT"),
 ]
 y = draw_brand_grid(c, y, "CLIMATISATION  —  Systèmes split, VRF & centralisés", clim_brands, BLUE)
@@ -339,8 +339,8 @@ y -= 18
 
 # --- Grille Ventilation & Aération ---
 ventilation_brands = [
-    ("fa.png", "France Air"),
-    ("systemair-logo-vector.png", "Systemair"),
+    ("fa-logo.png", "France Air"),
+    ("systemair-logo.png", "Systemair"),
 ]
 
 y = draw_brand_grid(c, y, "VENTILATION & AÉRATION  —  CTA, VMC & extraction", ventilation_brands, BLUE)
@@ -348,8 +348,8 @@ y -= 18
 
 # --- Grille Détection Incendie ---
 detection_brands = [
-    ("def.png", "DEF"),
-    ("ABB_logo.svg.png", "ABB"),
+    ("def-logo.png", "DEF"),
+    ("abb-logo.png", "ABB"),
 ]
 y = draw_brand_grid(c, y, "DÉTECTION INCENDIE  —  SSI, centrales & détecteurs", detection_brands, ORANGE)
 y -= 18
@@ -363,7 +363,7 @@ y -= 25
 
 # --- Grille Électricité (NOUVELLE SECTION) ---
 electricite_brands = [
-    ("se.png", "Schneider Electric"),
+    ("se-logo.png", "Schneider Electric"),
 ]
 
 y = draw_brand_grid(c, y, "ÉLECTRICITÉ  —  Matériel électrique, tableaux & armoires", electricite_brands, BLUE)

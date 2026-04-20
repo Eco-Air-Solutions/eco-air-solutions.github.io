@@ -973,26 +973,26 @@ function contactCard() {
 const LOGO_DIR = ""; // same as SRC or separate folder
 
 const climBrands = [
-  ["samsung-logo_logoshape.com.png", "Samsung"],
-  ["lg-vector-logo_logoshape.com.png", "LG"],
-  ["cropped-logo-condor-light.png", "Condor"],
-  ["TraneLogo_red.png", "Trane"],
+  ["samsung-logo.png", "Samsung"],
+  ["lg-logo.png", "LG"],
+  ["condor-logo.png", "Condor"],
+  ["trane-logo.png", "Trane"],
   ["ciat-logo.png", "CIAT"],
 ];
 
 const ventilationBrands = [
-  ["fa.png", "France Air"],
-  ["systemair-logo-vector.png", "Systemair"],
+  ["fa-logo.png", "France Air"],
+  ["systemair-logo.png", "Systemair"],
 ];
 
 const detectionBrands = [
-  ["def.png", "DEF"],
-  ["ABB_logo.svg.png", "ABB"],
+  ["def-logo.png", "DEF"],
+  ["abb-logo.png", "ABB"],
 ];
 
 const desenfBrands = [["dynair-logo.png", "Dynair"]];
 
-const electriciteBrands = [["se.png", "Schneider Electric"]];
+const electriciteBrands = [["se-logo.png", "Schneider Electric"]];
 
 // HEADER / FOOTER (unchanged)
 function makeHeader() {
