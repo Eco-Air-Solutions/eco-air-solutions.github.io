@@ -2099,7 +2099,7 @@ footer {
             <span data-lang="en">Thank you for your request. We will respond as soon as possible.</span>
             <span data-lang="ar">شكراً على طلبكم. سنجيب في أقرب وقت ممكن.</span>
           </p>
-          <button type="button" class="submit-btn" id="new-request-btn" style="margin-top: 1rem;">
+          <button type="button" class="submit-btn" id="new-request-btn" style="margin: 1rem auto 0; width: fit-content;">
             <span data-lang="fr" class="lang-active">Envoyer une autre demande</span>
             <span data-lang="en">Send another request</span>
             <span data-lang="ar">إرسال طلب آخر</span>
@@ -2121,7 +2121,7 @@ footer {
           </div>
           <div class="form-group">
             <label data-key="f_wilaya">Wilaya</label>
-            <select id="wilaya-select" name="Wilaya" data-fs-field>
+            <select id="wilaya-select" name="Wilaya" data-fs-field required>
               <option value="1-Adrar" data-fr="Adrar" data-ar="أدرار">Adrar</option>
               <option value="2-Chlef" data-fr="Chlef" data-ar="الشلف">Chlef</option>
               <option value="3-Laghouat" data-fr="Laghouat" data-ar="الأغواط">Laghouat</option>
@@ -2244,7 +2244,7 @@ footer {
           </div>
           <div class="form-group full">
             <label data-key="f_desc">Description du projet</label>
-            <textarea id="project-desc" name="Description" data-fs-field placeholder="Décrivez votre projet : type de bâtiment, superficie, besoins spécifiques..."></textarea>
+            <textarea id="project-desc" name="Description" data-fs-field placeholder="Décrivez votre projet : type de bâtiment, superficie, besoins spécifiques..." required></textarea>
           </div>
           <button type="submit" class="submit-btn" data-key="f_submit" data-fs-submit-btn>Envoyer la demande</button>
         </form>
@@ -2603,6 +2603,18 @@ contactForm.addEventListener('submit', async function(e) {
   if (errorBox) {
     errorBox.style.display = 'none';
     errorBox.textContent = '';
+  }
+
+  const serviceValue = contactForm.querySelector('#multi-service input[type="hidden"]').value.trim();
+  const serviceTypeValue = contactForm.querySelector('#multi-service-types input[type="hidden"]').value.trim();
+  if (!serviceValue || !serviceTypeValue) {
+    if (errorBox) {
+      errorBox.textContent = currentLang === 'fr'
+        ? 'Veuillez renseigner Service souhaite et Type de service.'
+        : (currentLang === 'ar' ? 'يرجى ادخال الخدمة المطلوبة ونوع الخدمة.' : 'Please fill Service needed and Service type.');
+      errorBox.style.display = 'block';
+    }
+    return;
   }
 
   if (submitBtn) submitBtn.disabled = true;
