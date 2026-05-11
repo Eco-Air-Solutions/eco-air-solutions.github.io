@@ -2099,9 +2099,14 @@ footer {
             <span data-lang="en">Thank you for your request. We will respond as soon as possible.</span>
             <span data-lang="ar">شكراً على طلبكم. سنجيب في أقرب وقت ممكن.</span>
           </p>
+          <button type="button" class="submit-btn" id="new-request-btn" style="margin-top: 1rem;">
+            <span data-lang="fr" class="lang-active">Envoyer une autre demande</span>
+            <span data-lang="en">Send another request</span>
+            <span data-lang="ar">إرسال طلب آخر</span>
+          </button>
         </div>
         <div data-fs-error class="form-error" style="display: none;"></div>
-        <form id="contact-form" class="form-grid">
+        <form id="contact-form" class="form-grid" action="https://formspree.io/f/mdappbap" method="POST">
           <div class="form-group">
             <label data-key="f_name">Nom complet</label>
             <input type="text" name="Nom complet" data-fs-field data-key="f_name_placeholder" placeholder="Ahmed Benali" required>
@@ -2490,20 +2495,6 @@ const imageObserver = new IntersectionObserver((entries) => {
 
 lazyImages.forEach(img => imageObserver.observe(img));
 
-// Formspree AJAX
-window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
-formspree('initForm', { 
-  formElement: '#contact-form', 
-  formId: 'mdappbap',
-  onSuccess: function() {
-    // Clear multi-select tags on success
-    document.querySelectorAll('.multi-select').forEach(function(container) {
-      container.querySelector('input[type="hidden"]').value = '';
-      container.querySelector('.multi-select-tags').innerHTML = '';
-    });
-  }
-});
-
 // Multi-select for service types
 function initMultiSelect(containerId, listId) {
   const container = document.getElementById(containerId);
@@ -2571,8 +2562,30 @@ function initMultiSelect(containerId, listId) {
 const multiService = initMultiSelect('multi-service', 'service-list');
 const multiServiceTypes = initMultiSelect('multi-service-types', 'service-types-list');
 
+function clearContactFormFields(form) {
+  form.querySelectorAll('input[type="text"], input[type="tel"], input[type="email"], textarea').forEach(function(field) {
+    field.value = '';
+  });
+
+  const wilayaSelect = form.querySelector('#wilaya-select');
+  if (wilayaSelect) wilayaSelect.selectedIndex = 0;
+
+  form.querySelectorAll('.multi-select').forEach(function(container) {
+    const hiddenInput = container.querySelector('input[type="hidden"]');
+    const tagsContainer = container.querySelector('.multi-select-tags');
+    const textInput = container.querySelector('.multi-select-input');
+    if (hiddenInput) hiddenInput.value = '';
+    if (tagsContainer) tagsContainer.innerHTML = '';
+    if (textInput) textInput.value = '';
+  });
+}
+
 // Ensure multi-select values are sent on form submit
-document.getElementById('contact-form').addEventListener('submit', function() {
+const contactForm = document.getElementById('contact-form');
+const newRequestBtn = document.getElementById('new-request-btn');
+contactForm.addEventListener('submit', async function(e) {
+  e.preventDefault();
+
   multiService.addPendingInput();
   multiServiceTypes.addPendingInput();
   multiService.updateHidden();
@@ -2582,7 +2595,52 @@ document.getElementById('contact-form').addEventListener('submit', function() {
   document.querySelectorAll('.multi-select input[type="hidden"]').forEach(function(h) {
     h.disabled = false;
   });
+
+  const submitBtn = contactForm.querySelector('[data-fs-submit-btn]');
+  const successBox = document.querySelector('[data-fs-success]');
+  const errorBox = document.querySelector('[data-fs-error]');
+
+  if (errorBox) {
+    errorBox.style.display = 'none';
+    errorBox.textContent = '';
+  }
+
+  if (submitBtn) submitBtn.disabled = true;
+
+  try {
+    const response = await fetch(contactForm.action, {
+      method: 'POST',
+      body: new FormData(contactForm),
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (!response.ok) {
+      throw new Error('Form submit failed');
+    }
+
+    if (successBox) successBox.style.display = 'block';
+    contactForm.style.display = 'none';
+    contactForm.reset();
+    clearContactFormFields(contactForm);
+  } catch (err) {
+    if (errorBox) {
+      errorBox.textContent = currentLang === 'fr'
+        ? 'Erreur lors de l\'envoi. Veuillez reessayer.'
+        : (currentLang === 'ar' ? 'حدث خطأ اثناء الارسال. يرجى المحاولة مرة اخرى.' : 'Error while sending. Please try again.');
+      errorBox.style.display = 'block';
+    }
+  } finally {
+    if (submitBtn) submitBtn.disabled = false;
+  }
 });
+
+if (newRequestBtn) {
+  newRequestBtn.addEventListener('click', function() {
+    const successBox = document.querySelector('[data-fs-success]');
+    if (successBox) successBox.style.display = 'none';
+    contactForm.style.display = 'grid';
+  });
+}
 
 // Reset multi-select on successful form submission
 document.querySelectorAll('.multi-select').forEach(function(container) {
@@ -2590,13 +2648,11 @@ document.querySelectorAll('.multi-select').forEach(function(container) {
   const tagsContainer = container.querySelector('.multi-select-tags');
   
   // Observe for reset
-  const form = document.getElementById('contact-form');
-  form.addEventListener('reset', function() {
+  contactForm.addEventListener('reset', function() {
     hiddenInput.value = '';
     tagsContainer.innerHTML = '';
   });
 });
 </script>
-<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>
