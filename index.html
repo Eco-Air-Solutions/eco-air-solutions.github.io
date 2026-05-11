@@ -2208,18 +2208,7 @@ footer {
               <input type="text" class="multi-select-input" data-key="f_select_placeholder" list="service-list" placeholder="Sélectionnez ou tapez..." autocomplete="off">
               <datalist id="service-list">
                 <option value="Étude">
-                <option value="Climatisation">
-                <option value="Ventilation">
-                <option value="Traitement de l'air">
-                <option value="Chauffage">
-                <option value="Froid industriel">
-                <option value="Désenfumage">
-                <option value="Protection incendie">
-                <option value="Détection incendie">
-                <option value="Électricité">
-                <option value="Régulation">
-                <option value="Pharmaceutique">
-                <option value="Fluides médicaux">
+                <option value="Installation et pose">
                 <option value="Maintenance">
               </datalist>
               <div class="multi-select-tags"></div>
@@ -2547,6 +2536,11 @@ function initMultiSelect(containerId, listId) {
     updateHidden();
   }
 
+  function addPendingInput() {
+    const value = input.value.trim();
+    if (value) addTag(value);
+  }
+
   input.addEventListener('input', function() {
     const value = this.value.trim();
     const options = document.querySelectorAll(`#${listId} option`);
@@ -2563,13 +2557,27 @@ function initMultiSelect(containerId, listId) {
       if (lastTag) lastTag.querySelector('button').click();
     }
   });
+
+  input.addEventListener('blur', function() {
+    addPendingInput();
+  });
+
+  return {
+    addPendingInput,
+    updateHidden
+  };
 }
 
-initMultiSelect('multi-service', 'service-list');
-initMultiSelect('multi-service-types', 'service-types-list');
+const multiService = initMultiSelect('multi-service', 'service-list');
+const multiServiceTypes = initMultiSelect('multi-service-types', 'service-types-list');
 
 // Ensure multi-select values are sent on form submit
 document.getElementById('contact-form').addEventListener('submit', function() {
+  multiService.addPendingInput();
+  multiServiceTypes.addPendingInput();
+  multiService.updateHidden();
+  multiServiceTypes.updateHidden();
+
   // Force update all hidden inputs
   document.querySelectorAll('.multi-select input[type="hidden"]').forEach(function(h) {
     h.disabled = false;
