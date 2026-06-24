@@ -37,6 +37,22 @@ def draw_section_title(c, y, number, title):
     c.line(MARGIN + 30, y - 4, width - MARGIN, y - 4)
     return y - 22
 
+def draw_wrapped_text(c, text, x, y, max_width, font_name="Helvetica", font_size=9.5, leading=12):
+    c.setFont(font_name, font_size)
+    line = ""
+    for word in text.split():
+        test = (line + " " + word).strip()
+        if c.stringWidth(test, font_name, font_size) <= max_width:
+            line = test
+        else:
+            c.drawString(x, y, line)
+            y -= leading
+            line = word
+    if line:
+        c.drawString(x, y, line)
+        y -= leading
+    return y
+
 def draw_brand_grid(c, y, title, brands, accent):
     """Grille de logos de marques"""
     c.setFillColor(accent)
@@ -46,7 +62,7 @@ def draw_brand_grid(c, y, title, brands, accent):
     c.drawCentredString(width / 2, y - 16, title)
     y -= 32
     card_w = (CONTENT_W - (len(brands) - 1) * 8) / len(brands)
-    card_h = 54
+    card_h = 48
     for i, (slug, label) in enumerate(brands):
         cx = MARGIN + i * (card_w + 8)
         cy = y - card_h
@@ -116,40 +132,28 @@ c.setStrokeColor(ORANGE)
 c.setLineWidth(2)
 c.line(MARGIN + 60, logo_y - 30, width - MARGIN - 60, logo_y - 30)
 
-# ========== ENCADRÉ "QUI SOMMES-NOUS" ==========
+# ========== ENCADRÉ D'INTRODUCTION ==========
 by = logo_y - 50
+intro_box_h = 88
 c.setFillColor(LIGHT_BLUE)
-c.roundRect(MARGIN, by - 90, CONTENT_W, 90, 8, fill=1, stroke=0)
+c.roundRect(MARGIN, by - intro_box_h, CONTENT_W, intro_box_h, 8, fill=1, stroke=0)
 c.setStrokeColor(BLUE)
 c.setLineWidth(2)
-c.line(MARGIN, by - 90, MARGIN, by)
+c.line(MARGIN, by - intro_box_h, MARGIN, by)
 
-intro = ("Eco Air Solutions est une entreprise specialisee dans l'etude, l'installation et la "
-         "maintenance de systemes CVC (Chauffage, Ventilation, Climatisation) en Algerie. "
-         "Nous accompagnons les professionnels et les particuliers avec une approche "
-         "ecoresponsable, privilegiant les solutions a basse consommation energetique. "
-         "Forts d'une presence sur les 69 wilayas, nous garantissons une expertise de "
-         "proximite sur tout le territoire national.")
+intro = ("Vous planifiez un projet CVC, une installation de climatisation, une ventilation "
+         "technique ou une maintenance multi-sites ? Eco Air Solutions vous accompagne de "
+         "l'étude jusqu'à la mise en service, avec des solutions adaptées aux contraintes "
+         "de votre bâtiment, à votre budget et à vos exigences de performance énergétique. "
+         "Nos équipes interviennent sur les 69 wilayas pour sécuriser vos délais, votre "
+         "conformité et votre confort d'exploitation.")
 
 c.setFillColor(DARK_GRAY)
-c.setFont("Helvetica", 10)
-text_obj = c.beginText(MARGIN + 15, by - 15)
-text_obj.setLeading(15)
-words = intro.split()
-line = ""
-for w in words:
-    test = (line + " " + w).strip()
-    if c.stringWidth(test, "Helvetica", 10) < CONTENT_W - 30:
-        line = test
-    else:
-        text_obj.textLine(line)
-        line = w
-text_obj.textLine(line)
-c.drawText(text_obj)
+draw_wrapped_text(c, intro, MARGIN + 15, by - 16, CONTENT_W - 30, "Helvetica", 9.5, 14)
 
 # ========== 3 STATISTIQUES ==========
-sy = by - 120
-for i, (num, label) in enumerate([("69", "Wilayas couvertes"), ("24/7", "Disponibilite SAV"), ("48h", "Devis garanti")]):
+sy = by - intro_box_h - 30
+for i, (num, label) in enumerate([("69", "Wilayas couvertes"), ("24/7", "Disponibilité SAV"), ("48h", "Devis garanti")]):
     bx = MARGIN + i * (CONTENT_W / 3) + (CONTENT_W / 6) - 40
     c.setFillColor(BLUE)
     c.roundRect(bx, sy - 50, 80, 55, 6, fill=1, stroke=0)
@@ -160,55 +164,61 @@ for i, (num, label) in enumerate([("69", "Wilayas couvertes"), ("24/7", "Disponi
     c.drawCentredString(bx + 40, sy - 36, label)
 
 # ========== SECTION 1 : DOMAINES D'INTERVENTION ==========
-y = sy - 120
+y = sy - 94
 y = draw_section_title(c, y, 1, "NOS DOMAINES D'INTERVENTION")
-y -= 10
+y -= 4
+
+sector_intro = ("Une proposition pensée pour votre secteur : confort, conformité, performance "
+                "et continuité d'exploitation.")
+c.setFillColor(DARK_GRAY)
+y = draw_wrapped_text(c, sector_intro, MARGIN, y, CONTENT_W, "Helvetica", 8.6, 11) - 4
 
 sectors = [
-    ('sector-building.jpg', 'Residentiel', 'Villas, appartements et habitations collectives.'),
-    ('sector-commercial.jpg', 'Tertiaire & Bureaux', 'Centres commerciaux et espaces de travail.'),
-    ('sector-energy.jpg', 'Industrie & Energie', 'Usines, entrepots et centrales electriques.'),
-    ('sector-healthcare.jpg', 'Sante & Hospitalier', 'Hopitaux, laboratoires, filtration HEPA.'),
-    ('sector-hospitality.jpg', 'Hotellerie & Restauration', 'Solutions silencieuses et performantes.'),
-    ('sector-food-industry.jpg', 'Agroalimentaire', 'Chambres froides et controle hygrometrie.'),
+    ('sector-building.jpg', 'Résidentiel', 'Confort durable pour villas et immeubles.'),
+    ('sector-commercial.jpg', 'Tertiaire & Bureaux', 'Air stable pour équipes et visiteurs.'),
+    ('sector-energy.jpg', 'Industrie & Énergie', "Continuité d'exploitation et sécurité."),
+    ('sector-healthcare.jpg', 'Santé & Hospitalier', 'Air traité et conformité zones sensibles.'),
+    ('sector-hospitality.jpg', 'Hôtellerie & Restauration', 'Confort client, cuisines et froid fiable.'),
+    ('sector-food-industry.jpg', 'Agroalimentaire', 'Chaîne du froid et qualité produit.'),
 ]
 
-card_w = (CONTENT_W - 10) / 2
-card_h = 62
+card_w = (CONTENT_W - 20) / 3
+card_h = 106
 col_gap = 10
-img_w = 55
+row_gap = 8
+img_h = 56
 
 for i, (img, title, desc) in enumerate(sectors):
-    col = i % 2
-    row = i // 2
+    col = i % 3
+    row = i // 3
     cx = MARGIN + col * (card_w + col_gap)
-    cy = y - row * (card_h + 8)
+    cy = y - row * (card_h + row_gap)
     c.setFillColor(LIGHT_GRAY)
     c.roundRect(cx, cy - card_h, card_w, card_h, 5, fill=1, stroke=0)
     c.setFillColor(BLUE)
     c.roundRect(cx, cy - card_h, 5, card_h, 2, fill=1, stroke=0)
     try:
-        c.drawImage(ImageReader(SRC + img), cx + 8, cy - card_h + 6,
-                    width=img_w, height=card_h - 12, preserveAspectRatio=True, mask='auto')
+        c.drawImage(ImageReader(SRC + img), cx + 12, cy - img_h - 8,
+                    width=card_w - 24, height=img_h, preserveAspectRatio=True, mask='auto')
     except:
         pass
     c.setFillColor(BLUE)
-    c.setFont("Helvetica-Bold", 10)
-    c.drawString(cx + img_w + 14, cy - 18, title)
+    c.setFont("Helvetica-Bold", 8.8)
+    c.drawCentredString(cx + card_w / 2, cy - img_h - 22, title)
     c.setFillColor(DARK_GRAY)
-    c.setFont("Helvetica", 8.5)
+    c.setFont("Helvetica", 7.5)
     words = desc.split()
     line = ""
-    dy = cy - 30
+    dy = cy - img_h - 35
     for w in words:
         test = (line + " " + w).strip()
-        if c.stringWidth(test, "Helvetica", 8.5) < card_w - img_w - 20:
+        if c.stringWidth(test, "Helvetica", 7.5) < card_w - 24:
             line = test
         else:
-            c.drawString(cx + img_w + 14, dy, line)
-            dy -= 12
+            c.drawCentredString(cx + card_w / 2, dy, line)
+            dy -= 10
             line = w
-    c.drawString(cx + img_w + 14, dy, line)
+    c.drawCentredString(cx + card_w / 2, dy, line)
 
 c.showPage()   # fin page 1
 
@@ -219,61 +229,105 @@ y = height - 30
 y = draw_section_title(c, y, 2, "NOS SERVICES")
 y -= 12
 
-services_list = [
-    {"letter": "A", "title": "Etude & Conception", "items": ["Bilans thermiques et calculs de charges.", "Plans CVC detailles (BIM/CAD).", "Audit et optimisation energetique."]},
-    {"letter": "B", "title": "Climatisation", "items": ["Systemes VRF, Split, Multi-Split.", "Cassette, gainable et centralise.", "Solutions inverter haute efficacite."]},
-    {"letter": "C", "title": "Ventilation", "items": ["VMC et ventilation mecanique.", "CTA et double flux.", "Desenfumage."]},
-    {"letter": "D", "title": "Traitement de l'Air", "items": ["CTA et unites de traitement.", "Filtration HEPA, ULPA.", "Humidification et deshumidification."]},
-    {"letter": "E", "title": "Chauffage", "items": ["Pompes a chaleur (PAC).", "Radiateurs et planchers chauffants.", "Production eau chaude et chaudieres."]},
-    {"letter": "F", "title": "Froid Industriel", "items": ["Chambres froides et caves a vin.", "Entrepots frigorifiques.", "Systemes de refrigeration."]},
-    {"letter": "G", "title": "Desenfumage", "items": ["Desenfumage mecanique et naturel.", "Extraction fumees et chaleur.", "Ventilation de securite (SEC)."]},
-    {"letter": "H", "title": "Protection Incendie", "items": ["Detection incendie (DET).", "Extinction automatique.", "Sprinklage et desenfumage."]},
-    {"letter": "I", "title": "Detection Incendie", "items": ["Detecteurs fumees et chaleur.", "Centrales dalarme (SSI).", "Transmission BAAS et PC securite."]},
-    {"letter": "J", "title": "Electricite", "items": ["Installation electrique.", "Tableaux et cablage.", "Eclairage et mise a la norme."]},
-    {"letter": "K", "title": "Regulation", "items": ["Systemes GTB/GTC.", "Supervision et domotique.", "Gestion technique du batiment."]},
-    {"letter": "L", "title": "Pharmaceutique", "items": ["Salles blanches.", "HVAC pharmaceutique et PCR.", "Controle temperature/hygrometrie."]},
-    {"letter": "M", "title": "Fluides Medicaux", "items": ["Reseaux O2 et vide medical.", "Air comprime medical.", "Conformite normes hospitalieres."]},
-    {"letter": "N", "title": "Maintenance & SAV", "items": ["Maintenance preventive et corrective.", "Disponibilite 24h/24, 7j/7.", "Mise en service et formation."]},
+service_intro = ("Pour faciliter votre lecture, notre offre est structurée autour de quatre "
+                 "compétences clés, complétées par des lots techniques mobilisables selon "
+                 "la nature du projet.")
+c.setFillColor(DARK_GRAY)
+y = draw_wrapped_text(c, service_intro, MARGIN, y, CONTENT_W, "Helvetica", 9.5, 13) - 6
+
+c.setFillColor(BLUE)
+c.setFont("Helvetica-Bold", 11)
+c.drawString(MARGIN, y, "Compétences clés")
+y -= 12
+
+core_services = [
+    ("01", "Étude & conception", [
+        "Cadrage du besoin et choix des solutions techniques.",
+        "Bilans thermiques, calculs de charges et dimensionnement.",
+        "Plans CVC détaillés, audit et optimisation énergétique.",
+    ]),
+    ("02", "Installation CVC", [
+        "VRF, Split, Multi-Split, cassette, gainable et centralisé.",
+        "Sélection d'équipements fiables et basse consommation.",
+        "Pose, raccordement, essais et mise en service contrôlée.",
+    ]),
+    ("03", "Ventilation & traitement d'air", [
+        "VMC, CTA, double flux, extraction et renouvellement d'air.",
+        "Filtration HEPA/ULPA selon les contraintes du site.",
+        "Humidification, déshumidification et désenfumage.",
+    ]),
+    ("04", "Maintenance & SAV", [
+        "Maintenance préventive et corrective des installations.",
+        "Contrats adaptés aux sites résidentiels, tertiaires et industriels.",
+        "Assistance 24h/24, 7j/7 pour les urgences techniques.",
+    ]),
 ]
 
 col_w = (CONTENT_W - 10) / 2
-bh = 65          # hauteur réduite pour tenir sur la page
-row_gap = 6
-for i, svc in enumerate(services_list):
+core_h = 86
+row_gap = 8
+for i, (num, title, items) in enumerate(core_services):
     col = i % 2
     row = i // 2
     bx = MARGIN + col * (col_w + 10)
-    cy = y - row * (bh + row_gap)
+    cy = y - row * (core_h + row_gap)
     c.setFillColor(LIGHT_BLUE)
-    c.roundRect(bx, cy - bh, col_w, bh, 6, fill=1, stroke=0)
+    c.roundRect(bx, cy - core_h, col_w, core_h, 6, fill=1, stroke=0)
     c.setFillColor(ORANGE)
-    c.circle(bx + 16, cy - 12, 12, fill=1, stroke=0)
+    c.circle(bx + 16, cy - 13, 12, fill=1, stroke=0)
     c.setFillColor(white)
-    c.setFont("Helvetica-Bold", 11)
-    c.drawCentredString(bx + 16, cy - 16, svc["letter"])
+    c.setFont("Helvetica-Bold", 9)
+    c.drawCentredString(bx + 16, cy - 16, num)
     c.setFillColor(BLUE)
     c.setFont("Helvetica-Bold", 9.5)
-    c.drawString(bx + 32, cy - 14, svc["title"])
-    iy = cy - 32
-    for item in svc["items"]:
+    c.drawString(bx + 34, cy - 14, title)
+    iy = cy - 31
+    for item in items:
         c.setFillColor(ORANGE)
-        c.circle(bx + 10, iy + 3, 2.5, fill=1, stroke=0)
+        c.circle(bx + 10, iy + 3, 2.2, fill=1, stroke=0)
         c.setFillColor(DARK_GRAY)
-        c.setFont("Helvetica", 8.5)
-        words = item.split()
-        line = ""
-        for w in words:
-            test = (line + " " + w).strip()
-            if c.stringWidth(test, "Helvetica", 8.5) < col_w - 22:
-                line = test
-            else:
-                c.drawString(bx + 18, iy, line)
-                iy -= 11
-                line = w
-        c.drawString(bx + 18, iy, line)
-        iy -= 12   # espacement entre items réduit
+        iy = draw_wrapped_text(c, item, bx + 18, iy, col_w - 24, "Helvetica", 7.7, 9) - 1
 
-y_after_services = y - ((len(services_list)+1)//2) * (bh + row_gap) - 30
+core_rows = (len(core_services) + 1) // 2
+y = y - core_rows * core_h - (core_rows - 1) * row_gap - 18
+
+c.setFillColor(BLUE)
+c.setFont("Helvetica-Bold", 11)
+c.drawString(MARGIN, y, "Services complémentaires")
+y -= 12
+
+complementary_services = [
+    ("Chauffage", "PAC, radiateurs, planchers chauffants, chaudières et eau chaude."),
+    ("Froid industriel", "Chambres froides, entrepôts frigorifiques et réfrigération."),
+    ("Protection incendie", "Détection, extinction automatique, sprinklage et sécurité incendie."),
+    ("Électricité", "Tableaux, câblage, éclairage et mise en conformité."),
+    ("Régulation GTB/GTC", "Supervision, domotique et gestion technique du bâtiment."),
+    ("Pharmaceutique", "Salles blanches, HVAC pharmaceutique et contrôle température/hygrométrie."),
+    ("Fluides médicaux", "Réseaux O2, vide médical, air comprimé et conformité hospitalière."),
+    ("Désenfumage", "Désenfumage mécanique/naturel et extraction fumées/chaleur."),
+    ("Audit énergétique", "Optimisation des consommations et réduction des coûts d'exploitation."),
+]
+
+comp_h = 40
+comp_gap = 5
+for i, (title, desc) in enumerate(complementary_services):
+    col = i % 2
+    row = i // 2
+    bx = MARGIN + col * (col_w + 10)
+    by = y - row * (comp_h + comp_gap)
+    c.setFillColor(LIGHT_GRAY)
+    c.roundRect(bx, by - comp_h, col_w, comp_h, 5, fill=1, stroke=0)
+    c.setStrokeColor(BLUE)
+    c.setLineWidth(1.2)
+    c.line(bx, by, bx, by - comp_h)
+    c.setFillColor(BLUE)
+    c.setFont("Helvetica-Bold", 8.5)
+    c.drawString(bx + 10, by - 12, title)
+    c.setFillColor(DARK_GRAY)
+    draw_wrapped_text(c, desc, bx + 10, by - 25, col_w - 18, "Helvetica", 7.3, 8)
+
+comp_rows = (len(complementary_services) + 1) // 2
+y_after_services = y - comp_rows * comp_h - (comp_rows - 1) * comp_gap - 24
 
 # --- SECTION 3 : ENGAGEMENTS (juste après les services) ---
 y = y_after_services
@@ -281,15 +335,15 @@ y = draw_section_title(c, y, 3, "NOS ENGAGEMENTS")
 y -= 15 
 
 engagements = [
-    ("Reactivite", "Diagnostic et devis sous 48h apres reception de votre demande.", "⏱"),
-    ("Couverture Nationale", "Intervention sur les 69 wilayas d'Algerie avec equipes locales.", "🗺"),
-    ("Conformite", "Respect strict des normes algeriennes (DTR) et internationales (ISO, EN).", "✅"),
-    ("Eco-responsabilite", "Optimisation energetique pour reduire vos couts d'exploitation.", "🌿"),
+    ("Réactivité", "Diagnostic et devis sous 48h après réception de votre demande."),
+    ("Couverture nationale", "Intervention sur les 69 wilayas d'Algérie avec équipes locales."),
+    ("Conformité", "Respect strict des normes algériennes (DTR) et internationales (ISO, EN)."),
+    ("Éco-responsabilité", "Optimisation énergétique pour réduire vos coûts d'exploitation."),
 ]
 
 eng_col_w = (CONTENT_W - 10) / 2
 eng_row_h = 75
-for i, (title, desc, icon) in enumerate(engagements):
+for i, (title, desc) in enumerate(engagements):
     col = i % 2
     row = i // 2
     bx = MARGIN + col * (eng_col_w + 10)
@@ -335,7 +389,7 @@ clim_brands = [
     ("ciat-logo.png", "CIAT"),
 ]
 y = draw_brand_grid(c, y, "CLIMATISATION  —  Systèmes split, VRF & centralisés", clim_brands, BLUE)
-y -= 18
+y -= 8
 
 # --- Grille Ventilation & Aération ---
 ventilation_brands = [
@@ -344,7 +398,7 @@ ventilation_brands = [
 ]
 
 y = draw_brand_grid(c, y, "VENTILATION & AÉRATION  —  CTA, VMC & extraction", ventilation_brands, BLUE)
-y -= 18
+y -= 8
 
 # --- Grille Détection Incendie ---
 detection_brands = [
@@ -352,13 +406,13 @@ detection_brands = [
     ("abb-logo.png", "ABB"),
 ]
 y = draw_brand_grid(c, y, "DÉTECTION INCENDIE  —  SSI, centrales & détecteurs", detection_brands, ORANGE)
-y -= 18
+y -= 8
 
 
 # Grille désenfumage
 desenfumage_brands = [("dynair-logo.png", "Dynair")]
 y = draw_brand_grid(c, y, "DÉSENFUMAGE  —  Ventilation & extraction incendie", desenfumage_brands, ORANGE)
-y -= 25
+y -= 10
 
 
 # --- Grille Électricité (NOUVELLE SECTION) ---
@@ -367,7 +421,7 @@ electricite_brands = [
 ]
 
 y = draw_brand_grid(c, y, "ÉLECTRICITÉ  —  Matériel électrique, tableaux & armoires", electricite_brands, BLUE)
-y -= 18
+y -= 8
 
 # Note partenariats
 c.setFillColor(LIGHT_BLUE)
@@ -385,7 +439,7 @@ c.drawString(MARGIN + 14, y - 43, "l'approvisionnement en pièces détachées, l
 
 # --- CARTE DE CONTACT ---
 card_h = 130
-y_contact = height - 680   
+y_contact = y - 60
 c.setFillColor(BLUE)
 c.roundRect(MARGIN, y_contact - card_h, CONTENT_W, card_h, 8, fill=1, stroke=0)
 try:
@@ -398,8 +452,9 @@ c.setFont("Helvetica-Bold", 14)
 c.drawString(MARGIN + 130, y_contact - 25, "Eco Air Solutions")
 c.setFont("Helvetica", 10)
 contacts = [
-    "Cites Vertes, Ouled Fayet, Alger, 16000",
-    "Rue Boutaf Boulaid, Zeghaia, Mila, 43012",
+    "Demandez votre diagnostic et devis gratuit sous 48h.",
+    "Bureau Alger : Cités Vertes, Ouled Fayet, Alger, 16000",
+    "Antenne Mila : Rue Boutaf Boulaid, Zeghaia, Mila, 43012",
     "+213 (0) 799 967 458",
     "ecoairsolutions909@gmail.com",
     "https://eco-air-solutions.github.io/",
@@ -407,7 +462,7 @@ contacts = [
 cy = y_contact - 45
 for ct in contacts:
     c.drawString(MARGIN + 130, cy, ct)
-    cy -= 16
+    cy -= 15
 
 c.save()
 print("PDF généré avec succès :", OUT)

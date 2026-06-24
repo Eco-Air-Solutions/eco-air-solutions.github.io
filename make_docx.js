@@ -116,7 +116,7 @@ function coverTitleTable() {
               new Paragraph({
                 children: [
                   new TextRun({
-                    text: "Avril 2026  \u2022  Alger, Algerie",
+                    text: "Avril 2026  \u2022  Alger, Algérie",
                     size: 18,
                     color: "AACCEE",
                     font: "Arial",
@@ -176,7 +176,7 @@ function logoTaglineTable() {
               new Paragraph({
                 children: [
                   new TextRun({
-                    text: "Technique  \u2022  Esthetique  \u2022  Confort",
+                    text: "Technique  \u2022  Esthétique  \u2022  Confort",
                     size: 18,
                     color: MID_GRAY,
                     font: "Arial",
@@ -200,13 +200,13 @@ function introPara() {
     shading: { fill: LIGHT_BLUE, type: ShadingType.CLEAR },
     children: [
       new TextRun({
-        text: "Eco Air Solutions est une entreprise specialisee dans l'etude, l'installation et la maintenance de systemes CVC (Chauffage, Ventilation, Climatisation) en Algerie. Nous accompagnons les professionnels et les particuliers avec une approche ecoresponsable, privilegiant les solutions a basse consommation energetique. Forts d'une presence sur les 69 wilayas, nous garantissons une expertise de proximite sur tout le territoire national.",
+        text: "Vous planifiez un projet CVC, une installation de climatisation, une ventilation technique ou une maintenance multi-sites ? Eco Air Solutions vous accompagne de l'étude jusqu'à la mise en service, avec des solutions adaptées aux contraintes de votre bâtiment, à votre budget et à vos exigences de performance énergétique. Nos équipes interviennent sur les 69 wilayas pour sécuriser vos délais, votre conformité et votre confort d'exploitation.",
         size: 20,
         color: DARK_GRAY,
         font: "Arial",
       }),
     ],
-    spacing: { before: 100, after: 200 },
+    spacing: { before: 60, after: 100 },
   });
 }
 
@@ -266,277 +266,215 @@ function statsTable() {
 const sectors = [
   [
     "sector-building.jpg",
-    "Residentiel",
-    "Villas, appartements et habitations collectives.",
+    "Résidentiel",
+    "Confort durable pour villas, résidences et immeubles collectifs.",
   ],
   [
     "sector-commercial.jpg",
     "Tertiaire & Bureaux",
-    "Centres commerciaux et espaces de travail centralises.",
+    "Air stable, silencieux et maîtrisé pour vos équipes et visiteurs.",
   ],
   [
     "sector-energy.jpg",
-    "Industrie & Energie",
-    "Usines, entrepots et centrales electriques.",
+    "Industrie & Énergie",
+    "Installations robustes pour continuité d'exploitation et sécurité.",
   ],
   [
     "sector-healthcare.jpg",
-    "Sante & Hospitalier",
-    "Hopitaux et laboratoires (filtration HEPA, zones steriles).",
+    "Santé & Hospitalier",
+    "Air traité, filtration et conformité pour zones sensibles.",
   ],
   [
     "sector-hospitality.jpg",
-    "Hotellerie & Restauration",
-    "Solutions silencieuses et performantes.",
+    "Hôtellerie & Restauration",
+    "Confort client, cuisines ventilées et froid fiable au quotidien.",
   ],
   [
     "sector-food-industry.jpg",
     "Agroalimentaire",
-    "Chambres froides et controle de l'hygrometrie.",
+    "Chaîne du froid, hygrométrie et qualité produit sécurisées.",
   ],
 ];
 
-function sectorCell(imgFile, title, desc, accentColor) {
-  const si = loadImg(imgFile, 72, 55);
-  const innerTable = new Table({
-    width: { size: 4440, type: WidthType.DXA },
-    columnWidths: [960, 3480],
-    borders: noBorders,
-    rows: [
-      new TableRow({
-        children: [
-          new TableCell({
-            width: { size: 960, type: WidthType.DXA },
-            borders: noBorders,
-            margins: { top: 60, bottom: 60, left: 60, right: 60 },
-            verticalAlign: VerticalAlign.CENTER,
-            children: si
-              ? [
-                  new Paragraph({
-                    children: [si],
-                    alignment: AlignmentType.CENTER,
-                  }),
-                ]
-              : [new Paragraph({ children: [] })],
-          }),
-          new TableCell({
-            width: { size: 3480, type: WidthType.DXA },
-            borders: noBorders,
-            margins: { top: 80, bottom: 80, left: 100, right: 80 },
-            verticalAlign: VerticalAlign.CENTER,
-            children: [
-              new Paragraph({
-                children: [
-                  new TextRun({
-                    text: title,
-                    bold: true,
-                    size: 20,
-                    color: BLUE,
-                    font: "Arial",
-                  }),
-                ],
-                spacing: { after: 40 },
-              }),
-              new Paragraph({
-                children: [
-                  new TextRun({
-                    text: desc,
-                    size: 17,
-                    color: DARK_GRAY,
-                    font: "Arial",
-                  }),
-                ],
-              }),
-            ],
-          }),
-        ],
+function sectorIntroPara() {
+  return new Paragraph({
+    children: [
+      new TextRun({
+        text: "Une proposition pensée pour votre secteur : confort, conformité, performance et continuité d'exploitation.",
+        size: 18,
+        color: DARK_GRAY,
+        font: "Arial",
       }),
     ],
+    alignment: AlignmentType.CENTER,
+    spacing: { after: 20 },
   });
+}
+
+function sectorCard(imgFile, title, desc, accentColor) {
+  const si = loadImg(imgFile, 136, 84);
   return new TableCell({
-    width: { size: 4440, type: WidthType.DXA },
+    width: { size: 3000, type: WidthType.DXA },
     shading: { fill: LIGHT_GRAY, type: ShadingType.CLEAR },
     borders: {
-      top: NO_BORDER,
-      bottom: NO_BORDER,
-      right: NO_BORDER,
-      insideV: NO_BORDER,
+      top: { style: BorderStyle.SINGLE, size: 2, color: "E4E4E4" },
+      bottom: { style: BorderStyle.SINGLE, size: 2, color: "E4E4E4" },
+      right: { style: BorderStyle.SINGLE, size: 2, color: "E4E4E4" },
       left: { style: BorderStyle.SINGLE, size: 10, color: accentColor },
     },
-    margins: { top: 0, bottom: 0, left: 0, right: 0 },
-    children: [innerTable],
+    margins: { top: 100, bottom: 100, left: 110, right: 110 },
+    verticalAlign: VerticalAlign.TOP,
+    children: [
+      new Paragraph({
+        children: si ? [si] : [],
+        alignment: AlignmentType.CENTER,
+        spacing: { after: 80 },
+      }),
+      new Paragraph({
+        children: [
+          new TextRun({
+            text: title,
+            bold: true,
+            size: 19,
+            color: BLUE,
+            font: "Arial",
+          }),
+        ],
+        alignment: AlignmentType.CENTER,
+        spacing: { after: 45 },
+      }),
+      new Paragraph({
+        children: [
+          new TextRun({
+            text: desc,
+            size: 15,
+            color: DARK_GRAY,
+            font: "Arial",
+          }),
+        ],
+        alignment: AlignmentType.CENTER,
+      }),
+    ],
   });
 }
 
 function sectorsGrid() {
-  const gapCol = new TableCell({
-    width: { size: 480, type: WidthType.DXA },
-    borders: noBorders,
-    children: [new Paragraph({ children: [] })],
-  });
+  const gapCell = () =>
+    new TableCell({
+      width: { size: 180, type: WidthType.DXA },
+      borders: noBorders,
+      children: [new Paragraph({ children: [] })],
+    });
   const rows = [];
-  for (let i = 0; i < sectors.length; i += 2) {
+  for (let i = 0; i < sectors.length; i += 3) {
     rows.push(
       new TableRow({
         children: [
-          sectorCell(...sectors[i], BLUE),
-          gapCol,
-          sectorCell(...(sectors[i + 1] || ["", "", ""]), ORANGE),
+          sectorCard(...sectors[i], BLUE),
+          gapCell(),
+          sectorCard(...sectors[i + 1], ORANGE),
+          gapCell(),
+          sectorCard(...sectors[i + 2], BLUE),
         ],
       }),
     );
-    rows.push(
-      new TableRow({
-        children: [
-          new TableCell({
-            width: { size: 9360, type: WidthType.DXA },
-            borders: noBorders,
-            children: [new Paragraph({ children: [], spacing: { after: 80 } })],
-          }),
-        ],
-      }),
-    );
+    if (i + 3 < sectors.length) {
+      rows.push(
+        new TableRow({
+          children: [
+            new TableCell({
+              width: { size: 3000, type: WidthType.DXA },
+              borders: noBorders,
+              children: [new Paragraph({ children: [], spacing: { after: 90 } })],
+            }),
+            gapCell(),
+            new TableCell({
+              width: { size: 3000, type: WidthType.DXA },
+              borders: noBorders,
+              children: [new Paragraph({ children: [] })],
+            }),
+            gapCell(),
+            new TableCell({
+              width: { size: 3000, type: WidthType.DXA },
+              borders: noBorders,
+              children: [new Paragraph({ children: [] })],
+            }),
+          ],
+        }),
+      );
+    }
   }
   return new Table({
     width: { size: 9360, type: WidthType.DXA },
-    columnWidths: [4440, 480, 4440],
+    columnWidths: [3000, 180, 3000, 180, 3000],
     borders: noBorders,
     rows,
   });
 }
 
-// SERVICES (liste complète A à N) ───────────────────────────────────────────
+// SERVICES ──────────────────────────────────────────────────────────────────
 
-const allServices = [
+const coreServices = [
   {
-    letter: "A",
-    title: "Etude & Conception",
+    kicker: "01",
+    title: "Étude & conception",
     items: [
-      "Bilans thermiques et calculs de charges.",
-      "Plans CVC detailles (BIM/CAD).",
-      "Audit et optimisation energetique.",
+      "Cadrage du besoin et choix des solutions techniques.",
+      "Bilans thermiques, calculs de charges et dimensionnement.",
+      "Plans CVC détaillés, audit et optimisation énergétique.",
     ],
   },
   {
-    letter: "B",
-    title: "Climatisation",
+    kicker: "02",
+    title: "Installation CVC",
     items: [
-      "Systemes VRF, Split, Multi-Split.",
-      "Cassette, gainable et centralise.",
-      "Solutions inverter haute efficacite.",
+      "VRF, Split, Multi-Split, cassette, gainable et centralisé.",
+      "Sélection d'équipements fiables et basse consommation.",
+      "Pose, raccordement, essais et mise en service contrôlée.",
     ],
   },
   {
-    letter: "C",
-    title: "Ventilation",
+    kicker: "03",
+    title: "Ventilation & traitement d'air",
     items: [
-      "VMC et ventilation mecanique.",
-      "CTA et double flux.",
-      "Desenfumage.",
+      "VMC, CTA, double flux, extraction et renouvellement d'air.",
+      "Filtration HEPA/ULPA selon les contraintes du site.",
+      "Humidification, déshumidification et désenfumage.",
     ],
   },
   {
-    letter: "D",
-    title: "Traitement de l_Air",
-    items: [
-      "CTA et unites de traitement.",
-      "Filtration HEPA, ULPA.",
-      "Humidification et deshumidification.",
-    ],
-  },
-  {
-    letter: "E",
-    title: "Chauffage",
-    items: [
-      "Pompes a chaleur (PAC).",
-      "Radiateurs et planchers chauffants.",
-      "Production eau chaude et chaudieres.",
-    ],
-  },
-  {
-    letter: "F",
-    title: "Froid Industriel",
-    items: [
-      "Chambres froides et caves a vin.",
-      "Entrepots frigorifiques.",
-      "Systemes de refrigeration.",
-    ],
-  },
-  {
-    letter: "G",
-    title: "Desenfumage",
-    items: [
-      "Desenfumage mecanique et naturel.",
-      "Extraction fumees et chaleur.",
-      "Ventilation de securite (SEC).",
-    ],
-  },
-  {
-    letter: "H",
-    title: "Protection Incendie",
-    items: [
-      "Detection incendie (DET).",
-      "Extinction automatique.",
-      "Sprinklage et desenfumage.",
-    ],
-  },
-  {
-    letter: "I",
-    title: "Detection Incendie",
-    items: [
-      "Detecteurs fumees et chaleur.",
-      "Centrales dalarme (SSI).",
-      "Transmission BAAS et PC securite.",
-    ],
-  },
-  {
-    letter: "J",
-    title: "Electricite",
-    items: [
-      "Installation electrique.",
-      "Tableaux et cablage.",
-      "Eclairage et mise a la norme.",
-    ],
-  },
-  {
-    letter: "K",
-    title: "Regulation",
-    items: [
-      "Systemes GTB/GTC.",
-      "Supervision et domotique.",
-      "Gestion technique du batiment.",
-    ],
-  },
-  {
-    letter: "L",
-    title: "Pharmaceutique",
-    items: [
-      "Salles blanches.",
-      "HVAC pharmaceutique et PCR.",
-      "Controle temperature/hygrometrie.",
-    ],
-  },
-  {
-    letter: "M",
-    title: "Fluides Medicaux",
-    items: [
-      "Reseaux O2 et vide medical.",
-      "Air comprime medical.",
-      "Conformite normes hospitalieres.",
-    ],
-  },
-  {
-    letter: "N",
+    kicker: "04",
     title: "Maintenance & SAV",
     items: [
-      "Maintenance preventive et corrective.",
-      "Disponibilite 24h/24, 7j/7.",
-      "Mise en service et formation.",
+      "Maintenance préventive et corrective des installations.",
+      "Contrats adaptés aux sites résidentiels, tertiaires et industriels.",
+      "Assistance 24h/24, 7j/7 pour les urgences techniques.",
     ],
   },
 ];
 
-function serviceCard(svc, colWidth) {
+const complementaryServices = [
+  ["Chauffage", "PAC, radiateurs, planchers chauffants, chaudières et eau chaude."],
+  ["Froid industriel", "Chambres froides, entrepôts frigorifiques et réfrigération."],
+  ["Protection incendie", "Détection, extinction automatique, sprinklage et sécurité incendie."],
+  ["Électricité", "Tableaux, câblage, éclairage et mise en conformité."],
+  ["Régulation GTB/GTC", "Supervision, domotique et gestion technique du bâtiment."],
+  ["Pharmaceutique", "Salles blanches, HVAC pharmaceutique et contrôle température/hygrométrie."],
+  ["Fluides médicaux", "Réseaux O2, vide médical, air comprimé et conformité hospitalière."],
+  ["Désenfumage", "Désenfumage mécanique/naturel et extraction fumées/chaleur."],
+  ["Audit énergétique", "Optimisation des consommations et réduction des coûts d'exploitation."],
+];
+
+function serviceGroupTitle(text) {
+  return new Paragraph({
+    children: [
+      new TextRun({ text, bold: true, size: 22, color: BLUE, font: "Arial" }),
+    ],
+    spacing: { before: 60, after: 80 },
+  });
+}
+
+function coreServiceCard(svc, colWidth) {
   const bulletStyle = { size: 14, color: DARK_GRAY, font: "Arial" };
   return new TableCell({
     width: { size: colWidth, type: WidthType.DXA },
@@ -547,9 +485,9 @@ function serviceCard(svc, colWidth) {
       new Paragraph({
         children: [
           new TextRun({
-            text: svc.letter,
+            text: svc.kicker,
             bold: true,
-            size: 32,
+            size: 24,
             color: ORANGE,
             font: "Arial",
           }),
@@ -579,18 +517,17 @@ function serviceCard(svc, colWidth) {
   });
 }
 
-function servicesTable() {
+function coreServicesTable() {
   const colWidth = 4440;
   const gapWidth = 480;
   const rows = [];
-  const half = Math.ceil(allServices.length / 2);
-  const leftCol = allServices.slice(0, half);
-  const rightCol = allServices.slice(half);
-  const maxRows = Math.max(leftCol.length, rightCol.length);
+  const leftCol = coreServices.slice(0, 2);
+  const rightCol = coreServices.slice(2);
+  const maxRows = 2;
   for (let i = 0; i < maxRows; i++) {
     const leftCell =
       i < leftCol.length
-        ? serviceCard(leftCol[i], colWidth)
+        ? coreServiceCard(leftCol[i], colWidth)
         : new TableCell({
             width: { size: colWidth, type: WidthType.DXA },
             borders: noBorders,
@@ -598,7 +535,7 @@ function servicesTable() {
           });
     const rightCell =
       i < rightCol.length
-        ? serviceCard(rightCol[i], colWidth)
+        ? coreServiceCard(rightCol[i], colWidth)
         : new TableCell({
             width: { size: colWidth, type: WidthType.DXA },
             borders: noBorders,
@@ -635,24 +572,101 @@ function servicesTable() {
   });
 }
 
+function complementaryServiceCell([title, desc], colWidth) {
+  return new TableCell({
+    width: { size: colWidth, type: WidthType.DXA },
+    shading: { fill: LIGHT_GRAY, type: ShadingType.CLEAR },
+    borders: noBorders,
+    margins: { top: 70, bottom: 70, left: 100, right: 100 },
+    children: [
+      new Paragraph({
+        children: [
+          new TextRun({ text: title, bold: true, size: 17, color: BLUE, font: "Arial" }),
+        ],
+        spacing: { after: 35 },
+      }),
+      new Paragraph({
+        children: [new TextRun({ text: desc, size: 14, color: DARK_GRAY, font: "Arial" })],
+      }),
+    ],
+  });
+}
+
+function complementaryServicesTable() {
+  const colWidth = 4440;
+  const gapWidth = 480;
+  const rows = [];
+  for (let i = 0; i < complementaryServices.length; i += 2) {
+    const right = complementaryServices[i + 1];
+    rows.push(
+      new TableRow({
+        children: [
+          complementaryServiceCell(complementaryServices[i], colWidth),
+          new TableCell({
+            width: { size: gapWidth, type: WidthType.DXA },
+            borders: noBorders,
+            children: [new Paragraph({ children: [] })],
+          }),
+          right
+            ? complementaryServiceCell(right, colWidth)
+            : new TableCell({
+                width: { size: colWidth, type: WidthType.DXA },
+                borders: noBorders,
+                children: [new Paragraph({ children: [] })],
+              }),
+        ],
+      }),
+    );
+    if (i + 2 < complementaryServices.length) {
+      rows.push(
+        new TableRow({
+          children: [
+            new TableCell({
+              width: { size: 9360, type: WidthType.DXA },
+              borders: noBorders,
+              children: [new Paragraph({ children: [], spacing: { after: 40 } })],
+            }),
+          ],
+        }),
+      );
+    }
+  }
+  return new Table({
+    width: { size: 9360, type: WidthType.DXA },
+    columnWidths: [colWidth, gapWidth, colWidth],
+    borders: noBorders,
+    rows,
+  });
+}
+
+function servicesBlock() {
+  return [
+    serviceGroupTitle("Compétences clés"),
+    coreServicesTable(),
+    spacer(70),
+    serviceGroupTitle("Services complémentaires"),
+    complementaryServicesTable(),
+  ];
+}
+
 // ENGAGEMENTS ────────────────────────────────────────────────────────────────
 
 const engagementsList = [
   [
-    "Reactivite",
-    "Diagnostic et devis sous 48h apres reception de votre demande.",
+    "Réactivité",
+    "Diagnostic et devis sous 48h après réception de votre demande.",
   ],
   [
-    "Couverture Nationale",
-    "Intervention sur les 69 wilayas d'Algerie avec equipes locales.",
+    "Couverture nationale",
+    "Intervention sur les 69 wilayas d'Algérie avec équipes locales.",
   ],
   [
-    "Conformite",
-    "Respect strict des normes algeriennes (DTR) et internationales (ISO, EN).",
+    "Conformité",
+    "Respect strict des normes algériennes (DTR) et internationales (ISO, EN).",
   ],
   [
-    "Eco-responsabilite",
-    "Optimisation energetique pour reduire vos couts d'exploitation.",
+    "Éco-responsabilité",
+    "Optimisation énergétique pour réduire vos coûts d'exploitation.",
   ],
 ];
 
@@ -885,7 +899,7 @@ function partnerNoteBox() {
               new Paragraph({
                 children: [
                   new TextRun({
-                    text: "Eco Air Solutions travaille en partenariat direct avec ces fabricants pour garantir l'approvisionnement en pieces detachees, la garantie constructeur et le support technique.",
+                    text: "Eco Air Solutions travaille en partenariat direct avec ces fabricants pour garantir l'approvisionnement en pièces détachées, la garantie constructeur et le support technique.",
                     size: 18,
                     color: DARK_GRAY,
                     font: "Arial",
@@ -942,8 +956,9 @@ function contactCard() {
                 spacing: { after: 80 },
               }),
               ...[
-                "Cites Vertes, Ouled Fayet, Alger, 16000",
-                "Rue Boutaf Boulaid, Zeghaia, Mila, 43012",
+                "Demandez votre diagnostic et devis gratuit sous 48h.",
+                "Bureau Alger : Cités Vertes, Ouled Fayet, Alger, 16000",
+                "Antenne Mila : Rue Boutaf Boulaid, Zeghaia, Mila, 43012",
                 "+213 (0) 799 967 458",
                 "ecoairsolutions909@gmail.com",
                 "https://eco-air-solutions.github.io/",
@@ -1076,7 +1091,9 @@ const doc = new Document({
         statsTable(),
         spacer(120),
         sectionHeading("1. NOS DOMAINES D'INTERVENTION"),
-        spacer(100),
+        spacer(60),
+        sectorIntroPara(),
+        spacer(70),
         sectorsGrid(),
         new Paragraph({ children: [new PageBreak()] }),
       ],
@@ -1089,7 +1106,7 @@ const doc = new Document({
       children: [
         sectionHeading("2. NOS SERVICES"),
         spacer(100),
-        servicesTable(),
+        ...servicesBlock(),
         spacer(120),
         sectionHeading("3. NOS ENGAGEMENTS"),
         spacer(100),
@@ -1107,35 +1124,35 @@ const doc = new Document({
         sectionHeading("4. NOS MARQUES PARTENAIRES"),
         spacer(100),
         brandSectionHeader(
-          "CLIMATISATION  —  Systemes split, VRF & centralises",
+          "CLIMATISATION  —  Systèmes split, VRF & centralisés",
           BLUE,
         ),
         spacer(80),
         brandGrid(climBrands, BLUE),
         spacer(200),
         brandSectionHeader(
-          "VENTILATION & AERATION  —  CTA, VMC & extraction",
+          "VENTILATION & AÉRATION  —  CTA, VMC & extraction",
           BLUE,
         ),
         spacer(80),
         brandGrid(ventilationBrands, BLUE),
         spacer(200),
         brandSectionHeader(
-          "DETECTION INCENDIE  —  SSI, centrales & detecteurs",
+          "DÉTECTION INCENDIE  —  SSI, centrales & détecteurs",
           ORANGE,
         ),
         spacer(80),
         brandGrid(detectionBrands, ORANGE),
         spacer(200),
         brandSectionHeader(
-          "DESENFUMAGE  —  Ventilation & extraction incendie",
+          "DÉSENFUMAGE  —  Ventilation & extraction incendie",
           ORANGE,
         ),
         spacer(80),
         brandGrid(desenfBrands, ORANGE),
         spacer(200),
         brandSectionHeader(
-          "ELECTRICITE  —  Materiel electrique, tableaux & armoires",
+          "ÉLECTRICITÉ  —  Matériel électrique, tableaux & armoires",
           BLUE,
         ),
         spacer(80),
